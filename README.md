@@ -30,40 +30,39 @@ for the features, where appropriate e.g. pm feature feature_name or pm feature m
     1. _Must_ implement a method of having a shorthand code for feature e.g. F1, F2.1..., stored in a file.
     2. _Must_ implement lookup to facilitate getting path from shorthand code
     3. _Should_ include setting up git branch as appropriate
-5.  Auto-generate Makefile(s) for features and project
 
 ### Should (up to 10% for each top level feature)
 
-6. Include mechanism for renaming features (subtrees)
-7. Include mechanism for moving feature to new location in tree (folder hierarchy)
-8. Output tree diagram - PBS or WBS (svg, using plantuml)
+5. Include mechanism for renaming features (subtrees)
+6. Include mechanism for moving feature to new location in tree (folder hierarchy)
+7. Output tree diagram - PBS or WBS (svg, using plantuml)
     1. Requires tree walk (iterative or recursive)
     2. _Must_ exclude folders that start with a '.'
     3. _Should_ use the plantuml tool
     4. _Could_ implement from scratch (much harder, more marks)
-9. Time/workload estimate information stored in files in subfolders
+8. Time/workload estimate information stored in files in subfolders
     1. _Should_ have mechanisms for adding these from the program not just editing the files
     2. _Should_ include subtrees costs in parent tree total
-10. Time/workload added to output diagram
+9. Time/workload added to output diagram
     1. _Could_ also produce Gantt chart (using plantuml)
 
 ### Could (up to 10% for each top level feature)
 
-11. Output diagram includes links (when used in browser, for example)
+10. Output diagram includes links (when used in browser, for example)
     1. _Should_ use plantuml to do this
-12. Dependencies information across tree branches
+11. Dependencies information across tree branches
     1. _Must_ identify relevant other paths in tree to do this
 
 
 ### Probably won't (up to 20% for each top level feature)
 
-13. GOAP recommendation of suitable pathway (Advanced, can use existing GOAP library, however)
+12. GOAP recommendation of suitable pathway (Advanced, can use existing GOAP library, however)
     1. GOAP uses a 'heap' data structure
-14. Available as web application (Advanced, probably easiest creating a simple embedded server)
+13. Available as web application (Advanced, probably easiest creating a simple embedded server)
     1. sample code for simple communications between applications will be covered
-15. Multi-user (Advanced, would require some form of permissions model)
+14. Multi-user (Advanced, would require some form of permissions model)
     1. may be best done using a traditional SQL database, but can use flat files.  Complex task.
-16. Guided work breakdown wizard (Slightly advanced, would require interactive questions/answer handling)
+15. Guided work breakdown wizard (Slightly advanced, would require interactive questions/answer handling)
     1. Needs a number of sub-features, such as minimum time allocation threshold, user input parsing
 
 
