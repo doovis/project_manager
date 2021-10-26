@@ -54,7 +54,7 @@ for the features, where appropriate e.g. pm feature feature_name or pm feature m
     1. _Must_ identify relevant other paths in tree to do this
 
 
-### Probably won't (up to 20% for each top level feature)
+### Elite challenges ("Won't do" in MoSCoW terms) (up to 20% for each top level feature)
 
 12. GOAP recommendation of suitable pathway (Advanced, can use existing GOAP library, however)
     1. GOAP uses a 'heap' data structure
