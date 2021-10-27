@@ -63,7 +63,7 @@ for the features, where appropriate e.g. pm feature feature_name or pm feature m
 14. Multi-user (Advanced, would require some form of permissions model)
     1. may be best done using a traditional SQL database, but can use flat files.  Complex task.
 15. Guided work breakdown wizard (Slightly advanced, would require interactive questions/answer handling)
-    1. Needs a number of sub-features, such as minimum time allocation threshold, user input parsing
+    1. Needs a number of sub-features, such as minimum time allocation threshold, user input parsing 
 
 
 
