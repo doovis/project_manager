@@ -25,11 +25,11 @@ for the features, where appropriate e.g. pm feature feature_name or pm feature m
     2. Requires using branching (_if_) to exit program if necessary
 2.  Be able to create basic file structure for project
 3.  Initialise git repository
-    1. _Should_ set up CSGitLab project etc.
+    1. _**Should**_ set up CSGitLab project etc.
 4.  Feature management
-    1. _Must_ implement a method of having a shorthand code for feature e.g. F1, F2.1..., stored in a file.
-    2. _Must_ implement lookup to facilitate getting path from shorthand code
-    3. _Should_ include setting up git branch as appropriate
+    1. _**Must**_ implement a method of having a shorthand code for feature e.g. F1, F2.1..., stored in a file.
+    2. _**Must**_ implement lookup to facilitate getting path from shorthand code
+    3. _**Should**_ include setting up git branch as appropriate
 
 ### Should (up to 10% for each top level feature)
 
@@ -37,21 +37,21 @@ for the features, where appropriate e.g. pm feature feature_name or pm feature m
 6. Include mechanism for moving feature to new location in tree (folder hierarchy)
 7. Output tree diagram - PBS or WBS (svg, using plantuml)
     1. Requires tree walk (iterative or recursive)
-    2. _Must_ exclude folders that start with a '.'
-    3. _Should_ use the plantuml tool
-    4. _Could_ implement from scratch (much harder, more marks)
+    2. _**Must**_ exclude folders that start with a '.'
+    3. _**Should**_ use the plantuml tool
+    4. _**Could**_ implement from scratch (much harder, more marks)
 8. Time/workload estimate information stored in files in subfolders
-    1. _Should_ have mechanisms for adding these from the program not just editing the files
-    2. _Should_ include subtrees costs in parent tree total
+    1. _**Should**_ have mechanisms for adding these from the program not just editing the files
+    2. _**Should**_ include subtrees costs in parent tree total
 9. Time/workload added to output diagram
-    1. _Could_ also produce Gantt chart (using plantuml)
+    1. _**Could**_ also produce Gantt chart (using plantuml)
 
 ### Could (up to 10% for each top level feature)
 
 10. Output diagram includes links (when used in browser, for example)
-    1. _Should_ use plantuml to do this
+    1. _**Should**_ use plantuml to do this
 11. Dependencies information across tree branches
-    1. _Must_ identify relevant other paths in tree to do this
+    1. _**Must**_ identify relevant other paths in tree to do this
 
 
 ### Elite challenges ("Won't do" in MoSCoW terms) (up to 20% for each top level feature)
