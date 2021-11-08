@@ -22,7 +22,7 @@ Coursework submission will include creating project documentation (using doxygen
 
 ### Must (up to 10% for each top level feature)
 
-1.  Abort if requested project/feature name already exists under 'root' folder.
+1.  Abort if requested project/feature name already exists under 'root' folder.  Here 'root' does not mean the / root of the file system, but the folder from which the program  is run.
     1. Requires checking existing file system for matching name
     2. Requires using branching (_if_) to exit program if necessary
 2.  Be able to create basic file structure for project
