@@ -16,6 +16,8 @@ Some of the features may be best implemented using shell (bash or zsh) scripting
 Tests will be provided for 1...10, which will also define the command line arguments required (including the sub-command name
 for the features, where appropriate e.g. pm feature feature_name or pm feature move new_feature_name ).
 
+Coursework submission will include creating project documentation (using doxygen) so code _**must**_ be well commented.  Any shell scripts or make files included in the solution _**must**_ be included in the documentation.  The submission itself _**must**_ be the URL of the CSGitLab repository used.
+
 ## Core functionality:
 
 ### Must (up to 10% for each top level feature)
