@@ -35,24 +35,37 @@ _**Hint**_: This might look something like this:
 
 ```mermaid
 graph LR
+
+    
     Project --> 1_must_haves
+    subgraph "Must have"
     1_must_haves --> 1_create_folder_structure
     1_must_haves --> 2_abort_if_exists
     1_must_haves --> 3_initialise_git
     1_must_haves --> 4_feature_management
-    4_feature_management --> 1_shorthand_codes
-    4_feature_management --> 2_shorthand_lookup
-    4_feature_management --> 3_git_branch_per_feature
+    end
+    
+    4_feature_management --> manage_features
+    subgraph "manage features"
+        manage_features(Manage Features)
+        manage_features --> 1_shorthand_codes
+        manage_features --> 2_shorthand_lookup
+        manage_features --> 3_git_branch_per_feature
+    end
+ 
     Project --> 2_should_haves
+    subgraph "Should have"
     2_should_haves --> 5_renaming_features
     2_should_haves --> 6_moving_features
     2_should_haves --> 7_tree_diagram
     2_should_haves --> 8_time_workload_data
     2_should_haves --> 9_time_workload_on_diagram
+    end
+    
     Project --> 3_could_haves
     Project --> 4_wont_haves
     Project --> readme.md
-
+    
 
 ```
 
