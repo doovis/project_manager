@@ -13,6 +13,8 @@ Identify the key goals you need to complete for the coursework
 
 ## Requirements to fulfill goals
 
+What do you need to be able to meet those goals?  This can include clearer specifications, tests (what needs testing, how to test it?), knowledge etc.
+
 1.
 1.
 1.
@@ -21,12 +23,38 @@ Identify the key goals you need to complete for the coursework
 
 ## Dependencies (mapping goals/requirements etc)
 
+Which requirements relate to which goals - think about drawing out a Product Breakdown for the coursework
+
 1.
 1.
 1.
 1.
 1.
 
+_**Hint**_: This might look something like this:
+
+```mermaid
+graph LR
+    Project --> 1_must_haves
+    1_must_haves --> 1_create_folder_structure
+    1_must_haves --> 2_abort_if_exists
+    1_must_haves --> 3_initialise_git
+    1_must_haves --> 4_feature_management
+    4_feature_management --> 1_shorthand_codes
+    4_feature_management --> 2_shorthand_lookup
+    4_feature_management --> 3_git_branch_per_feature
+    Project --> 2_should_haves
+    2_should_haves --> 5_renaming_features
+    2_should_haves --> 6_moving_features
+    2_should_haves --> 7_tree_diagram
+    2_should_haves --> 8_time_workload_data
+    2_should_haves --> 9_time_workload_on_diagram
+    Project --> 3_could_haves
+    Project --> 4_wont_haves
+    Project --> readme.md
+
+
+```
 
 ## Plan:
 
