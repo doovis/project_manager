@@ -1,4 +1,11 @@
-# Coursework 2 Project Plan
+# Coursework 2 Project Planning exercise
+
+Planning is the keystone of successful programming, but it need not all be dry paperwork.  The idea of experimenting with code in a series of feasibility studies can really help identify which approach to take.
+
+In this exercise, you have some thinking to do, and you should get together with others in your peer group (other students) to discuss ideas.
+
+First, though, grab a copy of this project by going to it on CSGitLab and using the "Fork" button near the top right corner.
+![image.png](./image.png)
 
 ## Goals 
 
