@@ -5,7 +5,10 @@ Planning is the keystone of successful programming, but it need not all be dry p
 In this exercise, you have some thinking to do, and you should get together with others in your peer group (other students) to discuss ideas.
 
 First, though, grab a copy of this project by going to it on CSGitLab and using the "Fork" button near the top right corner.
+
 ![image.png](./image.png)
+
+Please set your version of the project to "private" after forking.
 
 ## Goals 
 
