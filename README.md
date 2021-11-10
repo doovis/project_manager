@@ -22,10 +22,10 @@ Coursework submission will include creating project documentation (using doxygen
 
 ### Must (up to 10% for each top level feature)
 
-1.  Abort if requested project/feature name already exists under 'root' folder.  Here 'root' does not mean the / root of the file system, but the folder from which the program  is run.
+1.  Be able to create basic file structure for project
+2.  Abort if requested project/feature name already exists under 'root' folder.  Here 'root' does not mean the / root of the file system, but the folder from which the program  is run.
     1. Requires checking existing file system for matching name
     2. Requires using branching (_if_) to exit program if necessary
-2.  Be able to create basic file structure for project
 3.  Initialise git repository
     1. _**Should**_ set up CSGitLab project etc.
 4.  Feature management
@@ -58,14 +58,14 @@ Coursework submission will include creating project documentation (using doxygen
 
 ### Elite challenges ("Won't do" in MoSCoW terms) (up to 20% for each top level feature)
 
-12. GOAP recommendation of suitable pathway (Advanced, can use existing GOAP library, however)
-    1. GOAP uses a 'heap' data structure
-13. Available as web application (Advanced, probably easiest creating a simple embedded server)
-    1. sample code for simple communications between applications will be covered
-14. Multi-user (Advanced, would require some form of permissions model)
-    1. may be best done using a traditional SQL database, but can use flat files.  Complex task.
-15. Guided work breakdown wizard (Slightly advanced, would require interactive questions/answer handling)
+12. Guided work breakdown wizard (Slightly advanced, would require interactive questions/answer handling)
     1. Needs a number of sub-features, such as minimum time allocation threshold, user input parsing 
+13. Multi-user (Advanced, would require some form of permissions model)
+    1. may be best done using a traditional SQL database, but can use flat files.  Complex task.
+14. Available as web application (Advanced, probably easiest creating a simple embedded server)
+    1. sample code for simple communications between applications will be covered
+15. GOAP recommendation of suitable pathway (Advanced, can use existing GOAP library, however)
+    1. GOAP uses a 'heap' data structure
 
 
 
