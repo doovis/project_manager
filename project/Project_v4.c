@@ -50,7 +50,7 @@ int listing_directory(char* dirname)
 
 /** Searching for tags by listing directories recursively */
 
-int find_tag(const char* directory, char* entered_tag)
+void find_tag(const char* directory, char* entered_tag)
 {
   DIR *dir = opendir(directory);
 
@@ -72,7 +72,7 @@ int find_tag(const char* directory, char* entered_tag)
       strcat(path, entity->d_name);
       snprintf(tag_file, sizeof(tag_file), "%s/.pm_tag", path);
 
-      if (access(tag_file, F_OK) == 0)
+      if (access(tag_file, F_OK) == 0/* && access(current_dir_tag, F_OK) == 0*/)
       {
 //        printf("%s\n", tag_file);
 
@@ -103,10 +103,6 @@ int find_tag(const char* directory, char* entered_tag)
         }
 
         fclose(fp);
-      }
-      else
-      {
-        printf("There are no tags\n");
       }
       find_tag(path, entered_tag);
 
