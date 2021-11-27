@@ -182,7 +182,8 @@ int main(int argc, char *argv[])
 
   while (argc < 2 && strcmp(input, "quit") != 0)
   {
-    printf("\n\n\nPROJECT MANAGER TOOL\n\n\n\n");
+    system("clear");
+    printf("PROJECT MANAGER TOOL\n\n\n\n");
 
     printf("Select an option: \n\n");
     printf("\"mngdir\" - To manage directories\n");
