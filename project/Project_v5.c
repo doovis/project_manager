@@ -91,16 +91,13 @@ void find_tag(const char* directory, char* entered_tag)
           strtok(tag, "\n");
         }
 
-
+        printf("%s", tag);
 
         if (strcmp(entered_tag, tag) == 0)
         {
           printf("%s\n", path);
         }
-        else
-        {
-          printf("Tag not found\n");
-        }
+
 
         fclose(fp);
       }
@@ -346,6 +343,7 @@ int main(int argc, char *argv[])
 
       system(new_branch);
       creating_directory(argv[2]);
+      printf("Feature successfully added!\n");
     }
 
   }
@@ -388,6 +386,7 @@ int main(int argc, char *argv[])
       fputs(content, fp);
       fclose(fp);
       fp = NULL;
+      printf("Tag successfully added!\n");
     }
   }
 
@@ -407,15 +406,160 @@ int main(int argc, char *argv[])
 
     else
     {
-      find_tag(".", argv[2]);
+      char result_list[100][100];
+      char path[200];
+      int found = 0;
+
+      for (int i=0; i<list_file_type(1, result_list, 0, "."); i++)
+      {
+        snprintf(path, sizeof(path), "%s/.pm_tag", result_list[i]);
+        if (access(path, F_OK) == 0)
+        {
+          FILE *fp;
+          char tag[20];
+
+          fp = fopen(path, "r");
+          fseek(fp, 0, SEEK_END);
+          long int len = ftell(fp);
+
+
+          if(len > 0)
+          {
+            rewind(fp);
+            fgets(tag, 20, fp);
+            strtok(tag, "\n");
+          }
+
+          if (strcmp(argv[2], tag) == 0)
+          {
+            found = 1;
+            printf("%s\n", result_list[i]);
+          }
+          fclose(fp);
+        }
+      }
+      if (found == 0)
+      {
+        printf("Tag not found\n");
+      }
     }
   }
 
+  else if (strcmp(argv[1], "rename_directory") == 0)
+  {
+    if (argc > 4 || argc < 4 || strcmp(argv[2], "") == 0 || strcmp(argv[3], "") == 0)
+    {
+      printf("Wrong number of parameters, should be pm rename_directory existing_directory new_name\n");
+    }
 
+    else if (strchr(argv[2], ' ') != 0 || strchr(argv[3], ' ') != 0)
+    {
+      printf("Bad characters in folder name\n");
+    }
+
+    else if (access(argv[2], F_OK) == 0)
+    {
+      rename(argv[2], argv[3]);
+      printf("Directory successfully renamed!\n");
+    }
+
+    else
+    {
+      printf("Folder %s does not exist\n", argv[2]);
+    }
+
+  }
 
   else if (strcmp(argv[1], "move_by_tag") == 0)
   {
+    if (argc > 4 || argc < 4 || strcmp(argv[2], "") == 0 || strcmp(argv[3], "") == 0)
+    {
+      printf("Wrong number of parameters, should be pm move_by_tag source_tag new_location_tag\n");
+    }
 
+    else if (strchr(argv[2], ' ') != 0 || strchr(argv[3], ' ') != 0)
+    {
+      printf("Bad characters in folder name\n");
+    }
+
+    else
+    {
+      char result_list[100][100];
+      char path[200];
+      char arg2_tag[100];
+      char arg3_tag[100];
+      int found = 0;
+
+      for (int i=0; i<list_file_type(1, result_list, 0, "."); i++)
+      {
+        snprintf(path, sizeof(path), "%s/.pm_tag", result_list[i]);
+        if (access(path, F_OK) == 0)
+        {
+          FILE *fp;
+          char tag[20];
+
+          fp = fopen(path, "r");
+          fseek(fp, 0, SEEK_END);
+          long int len = ftell(fp);
+
+
+          if(len > 0)
+          {
+            rewind(fp);
+            fgets(tag, 20, fp);
+            strtok(tag, "\n");
+          }
+
+          if (strcmp(argv[2], tag) == 0)
+          {
+            found += 2;
+            snprintf(arg2_tag, sizeof(arg2_tag), "%s", result_list[i]);
+          }
+
+          else if (strcmp(argv[3], tag) == 0)
+          {
+            found++;
+            snprintf(arg3_tag, sizeof(arg3_tag), "%s", result_list[i]);
+          }
+          fclose(fp);
+        }
+      }
+
+      if (found == 0)
+      {
+        printf("Tags not found\n");
+      }
+
+      if (found == 1)
+      {
+        printf("First tag not found\n");
+      }
+
+      if (found == 2)
+      {
+        printf("Second tag not found\n");
+      }
+
+      if (found == 3)
+      {
+        char *directory_str[30];
+        char dir_path[120];
+        char arg2[50];
+        strcpy(arg2, arg2_tag);
+        int i = 0;
+
+
+        directory_str[i] = strtok(arg2_tag, "/");
+        while (directory_str[i] != NULL)
+        {
+          directory_str[++i] = strtok(NULL, "/");
+        }
+
+        snprintf(dir_path, sizeof(dir_path), "%s/%s", arg3_tag, directory_str[i-1]);
+        rename(arg2, dir_path);
+        printf("Directory successfully moved!\n");
+      }
+    }
   }
 
   else if (strcmp(argv[1], "output_svg") == 0)
