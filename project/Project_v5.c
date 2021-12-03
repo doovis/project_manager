@@ -20,7 +20,6 @@ int listing_directory(char* dirname)
   /** Selecting the specified directory through DIR struct */
   DIR* dir = opendir(dirname);
 
-  /** returning string if directory is empty */
   if (dir == NULL)
   {
     printf("Empty directory");
@@ -49,7 +48,7 @@ int listing_directory(char* dirname)
 
 
 /** Searching for tags by listing directories recursively */
-
+/*
 void find_tag(const char* directory, char* entered_tag)
 {
   DIR *dir = opendir(directory);
@@ -60,9 +59,6 @@ void find_tag(const char* directory, char* entered_tag)
 
   while (entity)
   {
-//    printf("%s/%s\n", directory, entity->d_name);
-//    printf("ENTERED TAG: %s\n", entered_tag);
-
     if (entity->d_type == DT_DIR && strcmp(entity->d_name, ".") != 0 && strcmp(entity->d_name, "..") != 0)
     {
       char tag_file[150];
@@ -72,10 +68,8 @@ void find_tag(const char* directory, char* entered_tag)
       strcat(path, entity->d_name);
       snprintf(tag_file, sizeof(tag_file), "%s/.pm_tag", path);
 
-      if (access(tag_file, F_OK) == 0/* && access(current_dir_tag, F_OK) == 0*/)
+      if (access(tag_file, F_OK) == 0)
       {
-//        printf("%s\n", tag_file);
-
         FILE *fp;
         char tag[20];
 
@@ -109,7 +103,7 @@ void find_tag(const char* directory, char* entered_tag)
 
   closedir(dir);
 }
-
+*/
 
 
 
@@ -156,6 +150,7 @@ int list_file_type(char type, char result[100][100], int index, char path[])
 
 
 /** Defining a function which creates a new folder structure */
+
 int creating_directory(char *newdir)
 {
   int folder = mkdir(newdir, 0777);
@@ -174,35 +169,35 @@ int creating_directory(char *newdir)
 
 int main(int argc, char *argv[])
 {
-  /** Defining constants for options in program */
+  /** Defining constants for later use in program */
   char manage_dir[INPUT_CHAR] = "mngdir";
   char create_git[INPUT_CHAR] = "git";
-  char input[INPUT_CHAR];
-  char s[100];
+  char user_input[INPUT_CHAR];
+  char cwd[100];
 
-  while (argc < 2 && strcmp(input, "quit") != 0)
+  /** Running project manager program in a loop */
+  while (argc < 2 && strcmp(user_input, "quit") != 0)
   {
     system("clear");
     printf("PROJECT MANAGER TOOL\n\n\n\n");
-
     printf("Select an option: \n\n");
     printf("\"mngdir\" - To manage directories\n");
+    printf("\"dir\"    - To print current directory\n");
     printf("\"git\"    - To init git\n");
     printf("\"quit\"   - To exit\n\n\n>>");
 
     /** User input for options */
-    fgets(input, INPUT_CHAR, stdin);
-    strtok(input, "\n");
+    fgets(user_input, INPUT_CHAR, stdin);
+    strtok(user_input, "\n");
 
-    if (strcmp(input, "dir") == 0)
+    if (strcmp(user_input, "dir") == 0)
     {
-      printf("%s\n", getcwd(s, 100));
+      printf("%s\n", getcwd(cwd, sizeof(cwd)));
     }
 
-    if (strcmp(input, manage_dir) == 0)
+    if (strcmp(user_input, manage_dir) == 0)
     {
       /** Defining options for managing directories */
-      char new_dir[MAX_CHAR];
       char option_input[INPUT_CHAR];
       char remove_dir[INPUT_CHAR] = "rmdir";
       char make_dir[INPUT_CHAR] = "mkdir";
@@ -231,12 +226,24 @@ int main(int argc, char *argv[])
 
       if(strcmp(option_input, remove_dir) == 0)
       {
-        printf("REMOVING DIR\n");
+        char dir_input[MAX_CHAR];
+        printf("Enter the name of the directory you'd like to remove: ");
+        fgets(dir_input, MAX_CHAR, stdin);
+        strtok(dir_input, "\n");
 
-
+        if (access(dir_input, F_OK) == 0)
+        {
+          rmdir(dir_input);
+          printf("REMOVING DIR %s\n", dir_input);
+        }
+        else
+        {
+          printf("No such directory\n");
+        }
       }
       else if(strcmp(option_input, make_dir) == 0)
       {
+        char new_dir[MAX_CHAR];
 
         /** Taking an input for a new directory */
         printf("Enter the name of the new directory: ");
@@ -253,14 +260,17 @@ int main(int argc, char *argv[])
           strtok(new_dir, "\n");
         }
 
-
-        printf("\n\nCreating directory: %s...\n", new_dir);
         int folder = mkdir(new_dir, 0777);
-
-        printf("%s has been successfully created\n\n\n", new_dir);
-        printf("new directory\n\n");
-        listing_directory(".");
-
+        if (access(new_dir, F_OK) == 0)
+        {
+          printf("%s has been successfully created\n\n\n", new_dir);
+          printf("new directory\n\n");
+          listing_directory(".");
+        }
+        else
+        {
+          printf("Something went wrong\n");
+        }
       }
 
       else if(strcmp(option_input, rename_dir) == 0)
@@ -280,12 +290,11 @@ int main(int argc, char *argv[])
 
       else
       {
-        continue;
       }
 
     }
 
-    else if(strcmp(input, create_git) == 0)
+    else if(strcmp(user_input, create_git) == 0)
     {
       system("git init; git remote add origin https://csgitlab.ac.uk/nn020334/pc20_pm_cw2.git");
     }
@@ -355,7 +364,7 @@ int main(int argc, char *argv[])
   {
     FILE *fp = NULL;
 
-    char content[5];
+    char content[10];
 
     if(access(".pm_tag", F_OK) == 0)
     {
@@ -382,7 +391,7 @@ int main(int argc, char *argv[])
     {
       fp = fopen(".pm_tag", "w+");
 
-      snprintf(content, 50, "%s\n", argv[2]);
+      snprintf(content, 10, "%s\n", argv[2]);
 
       fputs(content, fp);
       fclose(fp);
