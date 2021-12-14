@@ -1,3 +1,5 @@
 software_backup
-project/opt
+project/.opt
 project/text.txt
+project/test
+project/.pm_tag

@@ -294,53 +294,53 @@ int main(int argc, char *argv[])
 
     }
 
-    else if(strcmp(user_input, create_git) == 0)
+    else if(strcmp(user_input, create_git) == 0) /** Checking for command match */
     {
-      system("git init; git remote add origin https://csgitlab.ac.uk/nn020334/pc20_pm_cw2.git");
+      system("git init; git remote add origin https://csgitlab.ac.uk/nn020334/pc20_pm_cw2.git"); /** Initializing git */
     }
   }
 
 
 
-  if (strcmp(argv[1], "create_project") == 0)
+  if (strcmp(argv[1], "create_project") == 0) /** If command "create_project" - creating new project */
   {
-    if (access(argv[2], F_OK) == 0)
+    if (access(argv[2], F_OK) == 0) /** Checking for existing folders or files */
     {
       printf("A folder of that name already exists. Aborting.\n");
     }
 
-    else if (argc > 3 || argc < 3 || strcmp(argv[2], "") == 0)
+    else if (argc > 3 || argc < 3 || strcmp(argv[2], "") == 0) /** Checking for unallowed number of arguments */
     {
       printf("Wrong number of parameters, should be pm command arg\n");
     }
 
-    else if (strchr(argv[2], ' ') != 0)
+    else if (strchr(argv[2], ' ') != 0) /** Checking for unallowed spaces in the 3rd argument */
     {
       printf("Bad characters in folder name\n");
     }
 
     else
     {
-      creating_directory(argv[2]);
-      system("git init; git remote add origin https://csgitlab.ac.uk/nn020334/pc20_pm_cw2.git");
+      creating_directory(argv[2]); /** Calling a function for creating a directory with folders: bin, docs, lib, src, tests */
+      system("git init; git remote add origin https://csgitlab.ac.uk/nn020334/pc20_pm_cw2.git"); /** Initializing git */
     }
   }
 
 
 
-  else if (strcmp(argv[1], "add_feature") == 0)
+  else if (strcmp(argv[1], "add_feature") == 0) /** If command "add_feature" - creating new feature */
   {
-    if (access(argv[2], F_OK) == 0)
+    if (access(argv[2], F_OK) == 0) /** Checking for existing folders or files */
     {
       printf("A folder of that name already exists. Aborting.\n");
     }
 
-    else if (argc > 3 || argc < 3 || strcmp(argv[2], "") == 0)
+    else if (argc > 3 || argc < 3 || strcmp(argv[2], "") == 0) /** Checking for unallowed number of arguments */
     {
       printf("Wrong number of parameters, should be pm command arg\n");
     }
 
-    else if (strchr(argv[2], ' ') != 0)
+    else if (strchr(argv[2], ' ') != 0) /** Checking for unallowed spaces in the 3rd argument */
     {
       printf("Bad characters in folder name\n");
     }
@@ -349,10 +349,10 @@ int main(int argc, char *argv[])
     {
       char new_branch[50];
 
-      snprintf(new_branch, sizeof(new_branch), "git branch %s", argv[2]);
+      snprintf(new_branch, sizeof(new_branch), "git branch %s", argv[2]); /** Composing git command */
 
-      system(new_branch);
-      creating_directory(argv[2]);
+      system(new_branch); /** executing git */
+      creating_directory(argv[2]); /** Calling a function for creating a directory with folders: bin, docs, lib, src, tests */
       printf("Feature successfully added!\n");
     }
 
@@ -360,41 +360,41 @@ int main(int argc, char *argv[])
 
 
 
-  else if (strcmp(argv[1], "add_tag") == 0)
+  else if (strcmp(argv[1], "add_tag") == 0) /** If command "add_tag" - adding a new tag */
   {
-    FILE *fp = NULL;
+    FILE *fp = NULL; /** Establishing a pointer to the FILE structure */
 
-    char content[10];
+    char content[15];
 
-    if(access(".pm_tag", F_OK) == 0)
+    if(access(".pm_tag", F_OK) == 0) /** Checking for existing folders or files */
     {
-      fp = fopen(".pm_tag", "r");
-      fgets(content, sizeof(content), fp);
+      fp = fopen(".pm_tag", "r"); /** Opening a file */
+      fgets(content, sizeof(content), fp); /** Storing file's contents in a variable */
       printf("Already a tag for this folder\n");
       printf("%s", content);
 
-      fclose(fp);
+      fclose(fp); /** Closing a file */
       fp = NULL;
     }
 
-    else if(argc > 3 || argc < 3 || strcmp(argv[2], "") == 0)
+    else if(argc > 3 || argc < 3 || strcmp(argv[2], "") == 0) /** Checking for unallowed number of arguments */
     {
       printf("Wrong number of parameters, should be pm command arg\n");
     }
 
-    else if (strchr(argv[2], ' ') != 0)
+    else if (strchr(argv[2], ' ') != 0) /** Checking for unallowed spaces in the 3rd argument */
     {
       printf("Bad characters in folder name\n");
     }
 
     else
     {
-      fp = fopen(".pm_tag", "w+");
+      fp = fopen(".pm_tag", "w+"); /** Opening a file */
 
-      snprintf(content, 10, "%s\n", argv[2]);
+      snprintf(content, 10, "%s\n", argv[2]); /** Constructing a string */
 
-      fputs(content, fp);
-      fclose(fp);
+      fputs(content, fp);  /** Writing to a file */
+      fclose(fp); /** Closing a file */
       fp = NULL;
       printf("Tag successfully added!\n");
     }
@@ -402,14 +402,14 @@ int main(int argc, char *argv[])
 
 
 
-  else if (strcmp(argv[1], "find_tag") == 0)
+  else if (strcmp(argv[1], "find_tag") == 0) /** If command "find_tag" - finding a tag */
   {
-    if (argc > 3 || argc < 3 || strcmp(argv[2], "") == 0)
+    if (argc > 3 || argc < 3 || strcmp(argv[2], "") == 0) /** Checking for unallowed number of arguments */
     {
       printf("Wrong number of parameters, should be pm command arg\n");
     }
 
-    else if (strchr(argv[2], ' ') != 0)
+    else if (strchr(argv[2], ' ') != 0) /** Checking for unallowed spaces in the 3rd argument */
     {
       printf("Bad characters in folder name\n");
     }
@@ -422,7 +422,7 @@ int main(int argc, char *argv[])
       int local_tag = 0;
       int found = 0;
 
-      if (access(".pm_tag", F_OK) == 0)
+      if (access(".pm_tag", F_OK) == 0) /** Checking for existing folders or files */
       {
         FILE *fp;
         char tag[20];
@@ -484,39 +484,39 @@ int main(int argc, char *argv[])
     }
   }
 
-  else if (strcmp(argv[1], "rename_directory") == 0)
+  else if (strcmp(argv[1], "rename_directory") == 0) /** If command "rename_directory" - renaming existing directory */
   {
-    if (argc > 4 || argc < 4 || strcmp(argv[2], "") == 0 || strcmp(argv[3], "") == 0)
+    if (argc > 4 || argc < 4 || strcmp(argv[2], "") == 0 || strcmp(argv[3], "") == 0) /** Checking for unallowed number of arguments */
     {
       printf("Wrong number of parameters, should be pm rename_directory existing_directory new_name\n");
     }
 
-    else if (strchr(argv[2], ' ') != 0 || strchr(argv[3], ' ') != 0)
+    else if (strchr(argv[2], ' ') != 0 || strchr(argv[3], ' ') != 0) /** Checking for unallowed spaces in the 3rd and 4th arguments */
     {
       printf("Bad characters in folder name\n");
     }
 
-    else if (access(argv[2], F_OK) == 0)
+    else if (access(argv[2], F_OK) == 0) /** Checking for existing folders or files */
     {
       rename(argv[2], argv[3]);
       printf("Directory successfully renamed!\n");
     }
 
-    else
+    else /** If directory not found - Poping an error message */
     {
       printf("Couldn't find directory: %s\n", argv[2]);
     }
 
   }
 
-  else if (strcmp(argv[1], "move_by_tag") == 0)
+  else if (strcmp(argv[1], "move_by_tag") == 0) /** If command "move_by_tag" - creating new project */
   {
-    if (argc > 4 || argc < 4 || strcmp(argv[2], "") == 0 || strcmp(argv[3], "") == 0)
+    if (argc > 4 || argc < 4 || strcmp(argv[2], "") == 0 || strcmp(argv[3], "") == 0) /** Checking for unallowed number of arguments */
     {
       printf("Wrong number of parameters, should be pm move_by_tag source_tag new_location_tag\n");
     }
 
-    else if (strchr(argv[2], ' ') != 0 || strchr(argv[3], ' ') != 0)
+    else if (strchr(argv[2], ' ') != 0 || strchr(argv[3], ' ') != 0) /** Checking for unallowed spaces in the 3rd and 4th arguments */
     {
       printf("Bad characters in folder name\n");
     }
@@ -531,7 +531,7 @@ int main(int argc, char *argv[])
       int cur_dir = 0;
 
 
-      if (access(".pm_tag", F_OK) == 0)
+      if (access(".pm_tag", F_OK) == 0) /** Checking for existing folders or files */
       {
         FILE *fp;
         char tag[20];
@@ -637,65 +637,145 @@ int main(int argc, char *argv[])
     }
   }
 
-  else if (strcmp(argv[1], "output_svg") == 0)
+  else if (strcmp(argv[1], "output_svg") == 0) /** If command "output_svg" - creating WBS tree diagram */
   {
-    char directories[100];
-    char result_list[100][100];
-    char *dir[100];
-    char results[100];
-    int count = 0;
-/*
-    system("sudo apt install -y graphviz default-jre; mkdir -p .opt/plantuml; cd .opt/plantuml; sudo curl -JLO http://sourceforge.net/projects/plantuml/files/plantuml.jar/download;");
-    FILE *fp = fopen("tree_diagram.txt", "w");
-    if(access(argv[2], F_OK) == 0)
-*/
-    for (int i=0; i<list_file_type(1, result_list, 0, "."); i++)
+    if (argc > 3 || argc < 3 || strcmp(argv[2], "") == 0) /** Checking for unallowed number of arguments */
     {
-      snprintf(results, sizeof(results)+10, "%s", result_list[i]);
-//      printf("%s\n", result_list[i]);
-//      results = strtok(directories, "/");
-      while (results[count] != '\0')
-      {
-        if (results[count] == '/')
-        {
-          results[count] = '*';
-        }
-      count++;
-      }
-//      snprintf(results, sizeof(results), "%s", dir[i]);
-      printf("%s\n", results);
+      printf("Wrong number of parameters, should be pm command directory\n");
     }
-/*      if (access(path, F_OK) == 0)
+
+    else if (strchr(argv[2], ' ') != 0) /** Checking for unallowed spaces in the 3rd argument */
+    {
+      printf("Bad characters in folder name\n");
+    }
+
+    else if (access(argv[2], F_OK) == 0) /** Checking for existing folders or files */
+    {
+      char directory[40];
+      char result_list[100][100];
+      char *dir[100];
+      char results[200];
+      char constructed_str[400];
+      char num_of_slashes = 0;
+      char star[2] = "*";
+      char new_str[200];
+      char *token[100];
+      char variable[150];
+      char variable2[20];
+      char message[300];
+      int count = 0;
+      int num;
+      int i = 0;
+      int j = 0;
+
+
+      system("sudo apt install -y graphviz default-jre; mkdir -p .opt/plantuml; cd .opt/plantuml; sudo curl -JLO http://sourceforge.net/projects/plantuml/files/plantuml.jar/download;");
+
+      FILE *fp = fopen("tree_diagram.txt", "w");
+
+      snprintf(directory, sizeof(directory), "./%s", argv[2]);
+
+      int length = strlen(directory);
+      char input[40];
+      char cut_result[50];
+      char cut_trimmed_result[40];
+      char cut_str[40];
+
+      for(int i = 0; i < length; i++)
       {
-
+        input[i] = directory[i];
       }
-*/
+
+      memset(cut_str, '\0', sizeof(cut_str));
+      strncpy(cut_str, input, length);
 
 
+      for (int i=0; i<list_file_type(1, result_list, 0, "."); i++)
+      {
+        snprintf(results, sizeof(results), "%s", result_list[i]); /** path to the directory */
+
+        for(int i = 0; i < length; i++)
+        {
+          cut_result[i] = results[i];
+        }
+
+        memset(cut_trimmed_result, '\0', sizeof(cut_trimmed_result));
+        strncpy(cut_trimmed_result, cut_result, length);
 
 
+        if (strcmp(cut_trimmed_result, cut_str) == 0) /** if input path contains part of input execute code */
+        {
+
+          count = 0;
+          j = 0;
+          num_of_slashes = 0;
+          strcpy(variable2, "");
+
+          while (results[count] != '\0')
+          {
+            if (results[count] == '/')
+            {
+              num_of_slashes++; /** level of directory depth */
+            }
+            count++;
+          }
+
+          strcpy(new_str, results);
+          token[j] = strtok(new_str, "/");
+
+          while (token[j] != NULL)
+          {
+            token[++j] = strtok(NULL, "/");
+          }
+          snprintf(variable, sizeof(variable), "%s", token[j-1]);
 
 
+          for (num = 0; num < num_of_slashes; num++)
+          {
+            strcat(variable2, "*");
+          }
+          if (strcmp(variable, "bin") != 0 && strcmp(variable, "docs") != 0 && strcmp(variable, "lib") != 0 && strcmp(variable, "src") != 0 && strcmp(variable, "tests") != 0) /** Excluding bin, docs, lib, src, tests */
+          {
+            snprintf(message, sizeof(message)+50, "%s %s\n", variable2, variable);
+            strcat(constructed_str, message);
+          }
+        }
+      }
+
+      char mess[500];
+      char start_temp[20] = "@startwbs";
+      char end_temp[20] = "@endwbs";
+      int k = 0;
 
 
+      while (constructed_str[k] != '*')
+      {
+        memmove(constructed_str, constructed_str+1, strlen(constructed_str));
+      }
 
+      snprintf(mess, 500, "%s\n%s%s\n", start_temp, constructed_str, end_temp);
 
-/*
+      fputs(mess, fp);
+      fclose(fp);
 
-    char string_of_dirs[100];
-    char message[100];
-    snprintf(message, sizeof(message), "%s", string_of_dirs);
+      system("java -jar .opt/plantuml/plantuml.jar tree_diagram.txt");
+      printf("WBS Tree diagram output successful!");
+    }
 
-    fputs(message, fp);
-    fclose(fp);
+    else
+    {
+      printf("Couldn't find directory: %s\n", argv[2]);
+    }
+  }
 
-    system("java -jar .opt/plantuml.jar tree_diagram.txt");
-*/
+  else if (strcmp(argv[2], "calculate_workload") == 0)
+  {
+    printf("Feature\n");
   }
 
   else
   {
-    printf("Wrong number of parameters, should be pm command arg\n");
+    printf("Wrong command or number of parameters, should be pm command arg\n");
   }
 
   return 0;
