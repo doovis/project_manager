@@ -14,10 +14,10 @@
 
 
 
-/** Defining a function that lists specified directory */
+/** Defining a function which takes and lists specified directory */
 int listing_directory(char* dirname)
 {
-  /** Selecting the specified directory through DIR struct */
+  /* Selecting the specified directory through DIR struct */
   DIR* dir = opendir(dirname);
 
   if (dir == NULL)
@@ -25,10 +25,10 @@ int listing_directory(char* dirname)
     printf("Empty directory");
   }
 
-  /** defining directory entry structure type for reading */
+  /* defining directory entry structure type for reading */
   struct dirent* entity;
 
-  /** Listing all directories inside the directory */
+  /* Listing all directories inside specified directory */
   printf("__________________\n");
   while ((entity = readdir(dir)) != NULL)
   {
@@ -48,8 +48,8 @@ int listing_directory(char* dirname)
 }
 
 
-/** Defining a path construction function */
 const char* slash = "/";
+/** Defining a path construction function */
 void make_path(char result[], char path[], char fname[])
 {
 
@@ -60,7 +60,7 @@ void make_path(char result[], char path[], char fname[])
 }
 
 
-/** Defining recursive file directory search function */
+/** Recursively iterating through files/directories function */
 int list_file_type(char type, char result[100][100], int index, char path[])
 {
   DIR *d;
@@ -108,15 +108,16 @@ int creating_directory(char *newdir)
 
 
 
-
+/** Entering a program which has multiple interfaces.
+    A command line interface and a Wizard interface. */
 int main(int argc, char *argv[])
 {
-  /** If only 1 argument supplied enter wizard version */
+  /* If only 1 argument supplied enter wizard version */
   if (argc == 1)
   {
     char user_input[INPUT_CHAR];
 
-    /** Running program untill quit argument given */
+    /* Running program untill quit argument given */
     while (strcmp(user_input, "quit") != 0)
     {
       char manage_dir[INPUT_CHAR] = "mngdir";
@@ -128,6 +129,7 @@ int main(int argc, char *argv[])
 
       system("clear");
 
+      /* Listing current directory */
       printf("\033[0;32m");
       printf("PROJECT MANAGER TOOL\n\n");
       printf("\033[0m");
@@ -135,19 +137,21 @@ int main(int argc, char *argv[])
       printf("PATH:%s\n\n\n\n", getcwd(cwd, sizeof(cwd)));
       printf("\033[0m");
       printf("SELECT AN OPTION: \n\n");
+
+      /* Options for an action */
       printf("\"mngdir\"         - To manage directories\n");
       printf("\"create_project\" - To create default project structure\n");
       printf("\"quit\"           - To exit\n\n\n>>");
 
 
-      /** User input for options */
+      /* User input for options */
       fgets(user_input, INPUT_CHAR, stdin);
       strtok(user_input, "\n");
 
-      /** Entering directory manager option if appropriate string supplied */
+      /* Entering directory manager option if appropriate string supplied */
       if (strcmp(user_input, manage_dir) == 0)
       {
-        /** Defining options for managing directories */
+        /* Defining options for managing directories */
         char remove_dir[INPUT_CHAR] = "rmdir";
         char make_dir[INPUT_CHAR] = "mkdir";
         char rename_dir[INPUT_CHAR] = "rndir";
@@ -159,12 +163,12 @@ int main(int argc, char *argv[])
 
         strcpy(option_input, "");
 
-        /** Looping in directory manager option until appropriate string given */
+        /* Looping in directory manager option until appropriate string given */
         while (strcmp(option_input, "back") != 0)
         {
           system("clear");
 
-          /** Listing current directory */
+          /* Listing current directory */
           printf("\033[0;32m");
           printf("PROJECT MANAGER TOOL\n\n");
           printf("\033[0m");
@@ -175,7 +179,7 @@ int main(int argc, char *argv[])
           listing_directory(".");
           printf("\033[0m");
 
-          /** Options for managing directories */
+          /* Options for managing directories */
           printf("\nSELECT AN OPTION: \n\n");
           printf("\"rmdir\"          - To remove directory\n");
           printf("\"mkdir\"          - To create directory\n");
@@ -193,11 +197,11 @@ int main(int argc, char *argv[])
           printf("\033[0m");
 
 
-          /** User input for managing directory options */
+          /* User input for managing directory options */
           fgets(option_input, INPUT_CHAR, stdin);
           strtok(option_input, "\n");
 
-          /** Removing directory option */
+          /* Removing directory option */
           if(strcmp(option_input, remove_dir) == 0)
           {
             char dir_input[MAX_CHAR];
@@ -205,7 +209,7 @@ int main(int argc, char *argv[])
             fgets(dir_input, MAX_CHAR, stdin);
             strtok(dir_input, "\n");
 
-            /** Checking if input name exists */
+            /* Checking if input name exists */
             if (access(dir_input, F_OK) == 0)
             {
               char buffer[60];
@@ -220,25 +224,25 @@ int main(int argc, char *argv[])
             }
           }
 
-          /** Creating directory option */
+          /* Creating directory option */
           else if(strcmp(option_input, make_dir) == 0)
           {
             char new_dir[MAX_CHAR];
             int err_flag = 1;
 
-            /** Taking an input for a new directory */
+            /* Taking an input for a new directory */
             printf("Name of new directory: ");
             fgets(new_dir, MAX_CHAR, stdin);
 
-            /** Clarifying a raw string value by discarding the "\n" in the end */
+            /* Clarifying a raw string value by discarding the "\n" in the end */
             strtok(new_dir, "\n");
 
-            /** If flag is activated - run in a loop */
+            /* If flag is activated - run in a loop */
             while (err_flag == 1)
             {
               err_flag = 0;
 
-              /** Checking for empty entries */
+              /* Checking for empty entries */
               if (strchr(new_dir, ' ') != 0 || strcmp(new_dir, "\n") == 0)
               {
                 err_flag = 1;
@@ -251,7 +255,7 @@ int main(int argc, char *argv[])
 
               else
               {
-                /** Blocking clashing entries with current files */
+                /* Blocking clashing entries with current files */
                 while (access(new_dir, F_OK) == 0)
                 {
                   printf("Existing file - try different name: ");
@@ -264,25 +268,25 @@ int main(int argc, char *argv[])
             }
           }
 
-          /** Renaming directory option */
+          /* Renaming directory option */
           else if(strcmp(option_input, rename_dir) == 0)
           {
             char dir_to_rn[50];
             char new_name[50];
 
-            /** Storing input */
+            /* Storing input */
             printf("Directory to rename: ");
             fgets(dir_to_rn, MAX_CHAR, stdin);
             strtok(dir_to_rn, "\n");
 
-            /** Checking for existing directory */
+            /* Checking for existing directory */
             if (access(dir_to_rn, F_OK) == 0)
             {
               printf("New name: ");
               fgets(new_name, MAX_CHAR, stdin);
               strtok(new_name, "\n");
 
-              /** Averting empty entries */
+              /* Averting empty entries */
               if (strchr(new_name, ' ') != 0 || strcmp(new_name, "\n") == 0)
               {
                 printf("Invalid entry\n");
@@ -296,7 +300,7 @@ int main(int argc, char *argv[])
               }
             }
 
-            /** Averting empty entries */
+            /* Averting empty entries */
             else
             {
               printf("Directory doesn't exist\n");
@@ -305,26 +309,26 @@ int main(int argc, char *argv[])
             }
           }
 
-          /** Moving directory option */
+          /* Moving directory option */
           else if(strcmp(option_input, move_dir) == 0)
           {
             char dir_to_move[40];
             char destination[40];
             char buffer[80];
 
-            /** Storing input */
+            /* Storing input */
             printf("Directory to move: ");
             fgets(dir_to_move, MAX_CHAR, stdin);
             strtok(dir_to_move, "\n");
 
-            /** Checking for input directory existance */
+            /* Checking for input directory existance */
             if (access(dir_to_move, F_OK) == 0)
             {
               printf("Destination: ");
               fgets(destination, MAX_CHAR, stdin);
               strtok(destination, "\n");
 
-              /** Checking for input directory existance */
+              /* Checking for input directory existance */
               if (access(destination, F_OK) == 0)
               {
                 snprintf(buffer, sizeof(buffer), "%s/%s", destination, dir_to_move);
@@ -347,18 +351,18 @@ int main(int argc, char *argv[])
             }
           }
 
-          /** Moving up one level option */
+          /* Moving up one level option */
           else if(strcmp(option_input, up_dir) == 0)
           {
             char directory[40];
 
 
-            /** Storing input */
+            /* Storing input */
             printf("Move to directory: ");
             fgets(directory, MAX_CHAR, stdin);
             strtok(directory, "\n");
 
-            /** Checking if directory exists */
+            /* Checking if directory exists */
             if (access(directory, F_OK) == 0)
             {
               chdir(directory);
@@ -372,13 +376,13 @@ int main(int argc, char *argv[])
             }
           }
 
-          /** Moving down one level option */
+          /* Moving down one level option */
           else if(strcmp(option_input, down_dir) == 0)
           {
             chdir("..");
           }
 
-
+          /* Add feature option */
           else if(strcmp(option_input, add_feature) == 0)
           {
             char new_branch[50];
@@ -397,15 +401,15 @@ int main(int argc, char *argv[])
             strtok(feature_name, "\n");
 
             FILE *fp;
-            snprintf(new_branch, sizeof(new_branch), "git branch %s", feature_name); /** Composing git command */
+            snprintf(new_branch, sizeof(new_branch), "git branch %s", feature_name); /* Composing git command */
 
-            /** Checking for total project costs file */
+            /* Checking for total project costs file */
             if(access(".ft_parent", F_OK) == 0)
             {
-              system(new_branch); /** executing git */
-              creating_directory(feature_name); /** Calling a function for creating a directory with folders: bin, docs, lib, src, tests */
+              system(new_branch); /* executing git */
+              creating_directory(feature_name); /* Calling a function for creating a directory with folders: bin, docs, lib, src, tests */
 
-              /** Implementing time length counting system for the project */
+              /* Implementing time length counting system for the project */
               fp = fopen(".ft_est", "w");
 
               printf("How long will feature take to implement (in hour format e.g. \"6\"): ");
@@ -465,7 +469,7 @@ int main(int argc, char *argv[])
             }
           }
 
-          /** Feature 8 | If command "total_worktime" - total estimated hours to work on a project */
+          /* Displaying total estimated hours to work on a project option */
           else if(strcmp(option_input, "total_worktime") == 0)
           {
             if(access(".ft_parent", F_OK) == 0)
@@ -480,33 +484,33 @@ int main(int argc, char *argv[])
               FILE *fp;
 
 
-              /** iterating through the path's of directories inside current directory */
+              /* iterating through the path's of directories inside current directory */
               for (int i=0; i<list_file_type(1, result_list, 0, "."); i++)
               {
-                snprintf(path, sizeof(path), "%s/.ft_est", result_list[i]); /** Constructing a string */
+                snprintf(path, sizeof(path), "%s/.ft_est", result_list[i]); /* Constructing a string */
 
-                /** searching for a file */
+                /* searching for a file */
                 if (access(path, F_OK) == 0)
                 {
 
-                  /** individual feature length in hours */
+                  /* individual feature length in hours */
                   fp = fopen(path, "r");
                   fgets(duration, 10, fp);
                   strtok(duration, "\n");
                   fclose(fp);
 
-                  /** Converting to type int */
+                  /* Converting to type int */
                   int_feature_num = atoi(duration);
                   int_result += int_feature_num;
                   snprintf(char_result, sizeof(char_result), "%d", int_result);
 
 
-                  /** Putting found duration into the file */
+                  /* Putting found duration into the file */
                   fp = fopen(".ft_parent", "w");
                   fputs(char_result, fp);
                   fclose(fp);
 
-                  /** Reading total hour number */
+                  /* Reading total hour number */
                   fp = fopen(".ft_parent", "r");
                   fgets(contents, sizeof(contents) , fp);
                   fclose(fp);
@@ -526,18 +530,20 @@ int main(int argc, char *argv[])
           }
 
 
+          /* Enter features management option */
           else if (strcmp(option_input, "feature_mgmt") == 0)
           {
             char feature_input[INPUT_CHAR];
 
             strcpy(feature_input, "");
 
+            /* Until input is "back" continue to take input for options */
             while (strcmp(feature_input, "back") != 0)
             {
 
               system("clear");
 
-              /** Listing current directory */
+              /* Listing current directory */
               printf("\033[0;32m");
               printf("PROJECT MANAGER TOOL\n\n");
               printf("\033[0m");
@@ -548,7 +554,7 @@ int main(int argc, char *argv[])
               listing_directory(".");
               printf("\033[0m");
 
-              /** Options for managing directories */
+              /* Options for managing directories */
               printf("\nSELECT AN OPTION: \n\n");
               printf("\"add_tag\"  - To remove directory\n");
               printf("\"find_tag\" - To create directory\n\n");
@@ -556,15 +562,15 @@ int main(int argc, char *argv[])
               printf("\"back\"     - To go back to main menu\n\n>>");
               printf("\033[0m");
 
-              /** User input for managing directory options */
+              /* User input for managing directory options */
               fgets(feature_input, INPUT_CHAR, stdin);
               strtok(feature_input, "\n");
 
 
-              /** If command "add_tag" - adding a new tag */
+              /* Adding a new tag option */
               if (strcmp(feature_input, "add_tag") == 0)
               {
-                FILE *fp = NULL; /** Establishing a pointer to the FILE structure */
+                FILE *fp = NULL; /* Establishing a pointer to the FILE structure */
 
                 char content[15];
                 char tag_input[15];
@@ -573,14 +579,14 @@ int main(int argc, char *argv[])
                 fgets(tag_input, sizeof(tag_input), stdin);
                 strtok(tag_input, "\n");
 
-                if(access(".pm_tag", F_OK) == 0) /** Checking for existing folders or files */
+                if(access(".pm_tag", F_OK) == 0) /* Checking for existing folders or files */
                 {
-                  fp = fopen(".pm_tag", "r"); /** Opening a file */
-                  fgets(content, sizeof(content), fp); /** Storing file's contents in a variable */
+                  fp = fopen(".pm_tag", "r"); /* Opening a file */
+                  fgets(content, sizeof(content), fp); /* Storing file's contents in a variable */
                   printf("Already a tag for this folder\n");
                   printf("%s\n", content);
 
-                  fclose(fp); /** Closing a file */
+                  fclose(fp); /* Closing a file */
                   fp = NULL;
                   printf("Press enter...");
                   fgets(delaying_input, 2, stdin);
@@ -596,10 +602,10 @@ int main(int argc, char *argv[])
 
                 else
                 {
-                  fp = fopen(".pm_tag", "w+"); /** Opening a file */
+                  fp = fopen(".pm_tag", "w+"); /* Opening a file */
 
-                  fputs(tag_input, fp);  /** Writing to a file */
-                  fclose(fp); /** Closing a file */
+                  fputs(tag_input, fp);  /* Writing to a file */
+                  fclose(fp); /* Closing a file */
                   fp = NULL;
                   printf("Tag successfully added!\n");
                   printf("Press enter...");
@@ -609,7 +615,7 @@ int main(int argc, char *argv[])
 
 
 
-              /** If command "find_tag" - finding a tag */
+              /* Finding a tag option */
               else if (strcmp(feature_input, "find_tag") == 0)
               {
                 char tag_input[15];
@@ -626,74 +632,74 @@ int main(int argc, char *argv[])
                   int local_tag = 0;
                   int found = 0;
 
-                  /** Checking for existing folders or files */
+                  /* Checking for existing folders or files */
                   if (access(".pm_tag", F_OK) == 0)
                   {
                     FILE *fp;
                     char tag[20];
 
-                    fp = fopen(".pm_tag", "r"); /** Opening a file */
-                    fseek(fp, 0, SEEK_END); /** Setting file's position to the end of the stream */
-                    long int len = ftell(fp); /** Storing current file's position in stream */
+                    fp = fopen(".pm_tag", "r"); /* Opening a file */
+                    fseek(fp, 0, SEEK_END); /* Setting file's position to the end of the stream */
+                    long int len = ftell(fp); /* Storing current file's position in stream */
 
-                    /** If file's position more than 0 i.e. there is content */
+                    /* If file's position more than 0 i.e. there is content */
                     if(len > 0)
                     {
-                      rewind(fp); /** Rewinding file's position in stream */
-                      fgets(tag, sizeof(tag), fp); /** storing contents in a variable */
+                      rewind(fp); /* Rewinding file's position in stream */
+                      fgets(tag, sizeof(tag), fp); /* storing contents in a variable */
                       strtok(tag, "\n");
                     }
 
-                    /** If tag equals to input tag */
+                    /* If tag equals to input tag */
                     if (strcmp(tag_input, tag) == 0)
                     {
-                      local_tag++; /** marking tag's detection */
+                      local_tag++; /* marking tag's detection */
                       printf("%s\n", "./");
                       printf("Press enter...");
                       fgets(delaying_input, 2, stdin);
                     }
-                    fclose(fp); /** Closing a file */
+                    fclose(fp); /* Closing a file */
                   }
 
-                  /** If tag was not detected i.e. less than 1 */
+                  /* If tag was not detected i.e. less than 1 */
                   if (local_tag < 1)
                   {
-                    /** iterating through the path's of directories inside current directory */
+                    /* iterating through the path's of directories inside current directory */
                     for (int i=0; i<list_file_type(1, result_list, 0, "."); i++)
                   {
-                  snprintf(path, sizeof(path), "%s/.pm_tag", result_list[i]); /** Constructing a string */
+                  snprintf(path, sizeof(path), "%s/.pm_tag", result_list[i]); /* Constructing a string */
 
-                  /** searching for a file */
+                  /* searching for a file */
                   if (access(path, F_OK) == 0)
                   {
                     FILE *fp;
                     char tag[20];
 
-                    fp = fopen(path, "r"); /** opening a file */
-                    fseek(fp, 0, SEEK_END); /** Setting file's position to the end of the stream */
-                    long int len = ftell(fp); /** Storing current file's position in a stream */
+                    fp = fopen(path, "r"); /* opening a file */
+                    fseek(fp, 0, SEEK_END); /* Setting file's position to the end of the stream */
+                    long int len = ftell(fp); /* Storing current file's position in a stream */
 
-                    /** If file's position more than 0 i.e. there is content */
+                    /* If file's position more than 0 i.e. there is content */
                     if(len > 0)
                     {
-                      rewind(fp); /** Rewinding file's position */
-                      fgets(tag, 20, fp); /** Storing contents in a variable */
+                      rewind(fp); /* Rewinding file's position */
+                      fgets(tag, 20, fp); /* Storing contents in a variable */
                       strtok(tag, "\n");
                     }
 
-                    /** If tag equals to input tag */
+                    /* If tag equals to input tag */
                     if (strcmp(tag_input, tag) == 0)
                     {
-                      found = 1; /** Marking tag's detection */
+                      found = 1; /* Marking tag's detection */
                       printf("%s\n", result_list[i]);
                       printf("Press enter...");
                       fgets(delaying_input, 2, stdin);
                     }
-                    fclose(fp); /** Closing a file */
+                    fclose(fp); /* Closing a file */
                   }
                 }
 
-                /** if tag not found */
+                /* if tag not found */
                 if (found == 0)
                 {
                   printf("Tag not found\n");
@@ -707,12 +713,7 @@ int main(int argc, char *argv[])
       }
 
 
-
-
-
-
-
-
+          /* Output WBS tree diagram option */
           else if (strcmp(option_input, "output_svg") == 0)
           {
             char graph_dir[50];
@@ -738,52 +739,52 @@ int main(int argc, char *argv[])
             int j = 0;
 
 
-            /** Storing input */
+            /* Storing input */
             printf("Directory to graph: ");
             fgets(graph_dir, MAX_CHAR, stdin);
             strtok(graph_dir, "\n");
 
-            /** Checking if directory exists */
+            /* Checking if directory exists */
             if (access(graph_dir, F_OK) == 0)
             {
 
-              /** Installing plantuml */
+              /* Installing plantuml */
               system("sudo apt install -y graphviz default-jre; mkdir -p .opt/plantuml; cd .opt/plantuml; sudo curl -JLO http://sourceforge.net/projects/plantuml/files/plantuml.jar/download;");
 
-              FILE *fp = fopen("tree_diagram.txt", "w"); /** Creating a file */
+              FILE *fp = fopen("tree_diagram.txt", "w"); /* Creating a file */
 
-              snprintf(directory, sizeof(directory), "./%s", graph_dir); /** String construction */
+              snprintf(directory, sizeof(directory), "./%s", graph_dir); /* String construction */
 
-              int length = strlen(directory); /** Length of the string */
+              int length = strlen(directory); /* Length of the string */
 
-              /** Copying string */
+              /* Copying string */
               for(int i = 0; i < length; i++)
               {
                 input[i] = directory[i];
               }
 
-              /** Copying string */
+              /* Copying string */
               memset(cut_str, '\0', sizeof(cut_str));
               strncpy(cut_str, input, length);
 
 
-              /** Iterating through the current directory's directories */
+              /* Iterating through the current directory's directories */
               for (int i=0; i<list_file_type(1, result_list, 0, "."); i++)
               {
-                snprintf(results, sizeof(results), "%s", result_list[i]); /** Constructing the path */
+                snprintf(results, sizeof(results), "%s", result_list[i]); /* Constructing the path */
 
-                /** Copying string with limited length */
+                /* Copying string with limited length */
                 for(int i = 0; i < length; i++)
                 {
                   cut_result[i] = results[i];
                 }
 
-                /** Copying string */
+                /* Copying string */
                 memset(cut_trimmed_result, '\0', sizeof(cut_trimmed_result));
                 strncpy(cut_trimmed_result, cut_result, length);
 
 
-                /** if input path contains part of input execute code */
+                /* if input path contains part of input execute code */
                 if (strcmp(cut_trimmed_result, cut_str) == 0)
                 {
 
@@ -792,13 +793,13 @@ int main(int argc, char *argv[])
                   num_of_slashes = 0;
                   strcpy(variable2, "");
 
-                  /** Iterating through the characters */
+                  /* Iterating through the characters */
                   while (results[count] != '\0')
                   {
-                    /** If symbol / found */
+                    /* If symbol / found */
                     if (results[count] == '/')
                     {
-                      num_of_slashes++; /** level of directory depth */
+                      num_of_slashes++; /* level of directory depth */
                     }
                     count++;
                   }
@@ -817,23 +818,23 @@ int main(int argc, char *argv[])
                   tests = strstr(new_str, "tests");
 
 
-                  /** Excluding bin, docs, lib, src and tests folders */
+                  /* Excluding bin, docs, lib, src and tests folders */
                   if (bin || docs || lib || src || tests)
                   {
                   }
 
                   else
                   {
-                    token[j] = strtok(new_str, "/"); /** Dividing a string by symbol "/" into tokens */
+                    token[j] = strtok(new_str, "/"); /* Dividing a string by symbol "/" into tokens */
 
-                    /** Iterating through the string */
+                    /* Iterating through the string */
                     while (token[j] != NULL)
                     {
                       token[++j] = strtok(NULL, "/");
                     }
-                    snprintf(variable, sizeof(variable), "%s", token[j-1]); /** Constructing the string */
+                    snprintf(variable, sizeof(variable), "%s", token[j-1]); /* Constructing the string */
 
-                    /** Constructing number of levels in the directory */
+                    /* Constructing number of levels in the directory */
                     for (num = 0; num < num_of_slashes; num++)
                     {
                       strcat(variable2, "*");
@@ -850,19 +851,19 @@ int main(int argc, char *argv[])
               char end_temp[20] = "@endwbs";
               int k = 0;
 
-              /** Shifting 1 file's position */
+              /* Shifting 1 file's position */
               while (constructed_str[k] != '*')
               {
                 memmove(constructed_str, constructed_str+1, strlen(constructed_str));
               }
 
-              /** Constructing a final string in plantuml format */
+              /* Constructing a final string in plantuml format */
               snprintf(mess, 500, "%s\n%s%s\n", start_temp, constructed_str, end_temp);
 
-              fputs(mess, fp); /** Writing string to file */
-              fclose(fp); /** Colsing the file */
+              fputs(mess, fp); /* Writing string to file */
+              fclose(fp); /* Colsing the file */
 
-              /** Processing txt file through plantuml */
+              /* Processing txt file through plantuml */
               system("java -jar .opt/plantuml/plantuml.jar tree_diagram.txt");
 
               int flag = 0;
@@ -891,20 +892,20 @@ int main(int argc, char *argv[])
             }
           }
 
-          /** Feature 9 | If command "output_gantt" - creating gantt chart */
+          /* Creating gantt chart option */
           else if (strcmp(option_input, "output_gantt") == 0)
           {
 
             char graph_chart[20];
 
 
-            /** Storing input */
+            /* Storing input */
             printf("Directory to graph: ");
             fgets(graph_chart, MAX_CHAR, stdin);
             strtok(graph_chart, "\n");
 
 
-            if (access(graph_chart, F_OK) == 0) /** Checking for existing file */
+            if (access(graph_chart, F_OK) == 0) /* Checking for existing file */
             {
               char directory[40];
               char result_list[100][100];
@@ -929,18 +930,18 @@ int main(int argc, char *argv[])
               char hours[8];
               char hour_path[220];
 
-              /** Installing plantuml */
+              /* Installing plantuml */
               system("sudo apt install -y graphviz default-jre; mkdir -p .opt/plantuml; cd .opt/plantuml; sudo curl -JLO http://sourceforge.net/projects/plantuml/files/plantuml.jar/download;");
 
               FILE *fp;
-              fp = fopen("gantt_chart.txt", "w"); /** Creating a file */
+              fp = fopen("gantt_chart.txt", "w"); /* Creating a file */
               fclose(fp);
 
-              snprintf(directory, sizeof(directory), "./%s", graph_chart); /** String construction */
+              snprintf(directory, sizeof(directory), "./%s", graph_chart); /* String construction */
 
-              int length = strlen(directory); /** Length of the string */
+              int length = strlen(directory); /* Length of the string */
 
-              /** Copying string */
+              /* Copying string */
               for(int i = 0; i < length; i++)
               {
                 input[i] = directory[i];
@@ -950,12 +951,12 @@ int main(int argc, char *argv[])
               strncpy(cut_str, input, length);
 
 
-              /** Iterating through the current directory's directories */
+              /* Iterating through the current directory's directories */
               for (int i=0; i<list_file_type(1, result_list, 0, "."); i++)
               {
-                snprintf(results, sizeof(results), "%s", result_list[i]); /** Constructing the path */
+                snprintf(results, sizeof(results), "%s", result_list[i]); /* Constructing the path */
 
-                /** Copying string with limited length */
+                /* Copying string with limited length */
                 for(int i = 0; i < length; i++)
                 {
                   cut_result[i] = results[i];
@@ -977,7 +978,7 @@ int main(int argc, char *argv[])
                   fclose(fp);
                 }
 
-                /** if input path contains part of input execute code */
+                /* if input path contains part of input execute code */
                 if (strcmp(cut_trimmed_result, cut_str) == 0)
                 {
                   j = 0;
@@ -996,20 +997,20 @@ int main(int argc, char *argv[])
                   tests = strstr(new_str, "tests");
 
 
-                  /** Excluding bin, docs, lib, src and tests folders */
+                  /* Excluding bin, docs, lib, src and tests folders */
                   if (bin || docs || lib || src || tests)
                   {
                   }
                   else
                   {
-                    token[j] = strtok(new_str, "/"); /** Dividing a string by symbol "/" into tokens */
+                    token[j] = strtok(new_str, "/"); /* Dividing a string by symbol "/" into tokens */
 
-                    /** Iterating through the string */
+                    /* Iterating through the string */
                     while (token[j] != NULL)
                     {
                       token[++j] = strtok(NULL, "/");
                     }
-                    snprintf(variable, sizeof(variable), "%s", token[j-1]); /** Constructing the string */
+                    snprintf(variable, sizeof(variable), "%s", token[j-1]); /* Constructing the string */
 
 
                     int k = 0;
@@ -1039,22 +1040,22 @@ int main(int argc, char *argv[])
               char start_temp[20] = "@startgantt";
               char end_temp[20] = "@endgantt";
               int k = 0;
-              /** Shifting 1 file's position */
+              /* Shifting 1 file's position */
 
               while (constructed_str[k] != '[')
               {
                 memmove(constructed_str, constructed_str+1, strlen(constructed_str));
               }
 
-              /** Constructing a final string in plantuml format */
+              /* Constructing a final string in plantuml format */
               snprintf(mess, 500, "%s\n%s%s\n", start_temp, constructed_str, end_temp);
 
-              fp = fopen("gantt_chart.txt", "w"); /** Opening a file */
+              fp = fopen("gantt_chart.txt", "w"); /* Opening a file */
 
-              fputs(mess, fp); /** Writing string to file */
-              fclose(fp); /** Colsing the file */
+              fputs(mess, fp); /* Writing string to file */
+              fclose(fp); /* Colsing the file */
 
-              /** Processing txt file through plantuml */
+              /* Processing txt file through plantuml */
               system("java -jar .opt/plantuml/plantuml.jar gantt_chart.txt");
 
 
@@ -1074,7 +1075,7 @@ int main(int argc, char *argv[])
               }
             }
 
-            /** If specified directory not found */
+            /* If specified directory not found */
             else
             {
               printf("Couldn't find directory: %s\n", option_input);
@@ -1084,14 +1085,14 @@ int main(int argc, char *argv[])
       }
 
 
-      /** Creating new project */
+      /* Creating new project */
       else if (strcmp(user_input, create_proj) == 0)
       {
         char direct[30];
 
         FILE *fp;
 
-        /** Creating new directory */
+        /* Creating new directory */
         printf("Name of project: ");
         fgets(direct, MAX_CHAR, stdin);
         strtok(direct, "\n");
@@ -1106,7 +1107,7 @@ int main(int argc, char *argv[])
 
         else
         {
-          /** Averting empty entries */
+          /* Averting empty entries */
           if (strchr(direct, ' ') != 0 || strcmp(direct, "\n") == 0)
           {
             printf("Invalid entry\n");
@@ -1123,7 +1124,7 @@ int main(int argc, char *argv[])
             creating_directory(".");
             fp = fopen(".ft_parent", "w");
             fputs("0", fp);
-            system("git init; git remote add origin https://csgitlab.ac.uk/nn020334/pc20_pm_cw2.git"); /** Initializing git */
+            system("git init; git remote add origin https://csgitlab.ac.uk/nn020334/pc20_pm_cw2.git"); /* Initializing git */
           }
         fclose(fp);
         }
@@ -1133,21 +1134,21 @@ int main(int argc, char *argv[])
   }
 
 
-  /** CLI VERSION */
-  /** Features 1,2,3,8 | If command "create_project" - creating new project */
+  /* CLI VERSION */
+  /* Features 1,2,3,8 | If command "create_project" - creating new project */
   else if (strcmp(argv[1], "create_project") == 0)
   {
-    if (access(argv[2], F_OK) == 0) /** Checking for existing folders or files */
+    if (access(argv[2], F_OK) == 0) /* Checking for existing folders or files */
     {
       printf("A folder of that name already exists. Aborting.\n");
     }
 
-    else if (argc > 3 || argc < 3 || strcmp(argv[2], "") == 0) /** Checking for unallowed number of arguments */
+    else if (argc > 3 || argc < 3 || strcmp(argv[2], "") == 0) /* Checking for unallowed number of arguments */
     {
       printf("Wrong number of parameters, should be pm command arg\n");
     }
 
-    else if (strchr(argv[2], ' ') != 0) /** Checking for unallowed spaces in the 3rd argument */
+    else if (strchr(argv[2], ' ') != 0) /* Checking for unallowed spaces in the 3rd argument */
     {
       printf("Bad characters in folder name\n");
     }
@@ -1156,30 +1157,30 @@ int main(int argc, char *argv[])
     {
       FILE *fp;
 
-      creating_directory(argv[2]); /** Calling a function for creating a directory with folders: bin, docs, lib, src, tests */
+      creating_directory(argv[2]); /* Calling a function for creating a directory with folders: bin, docs, lib, src, tests */
       fp = fopen(".ft_parent", "w");
       fputs("0", fp);
-      system("git init; git remote add origin https://csgitlab.ac.uk/nn020334/pc20_pm_cw2.git"); /** Initializing git */
+      system("git init; git remote add origin https://csgitlab.ac.uk/nn020334/pc20_pm_cw2.git"); /* Initializing git */
 
       fclose(fp);
     }
   }
 
 
-  /** Features 1,2,3,8 | If command "add_feature" - creating new feature */
+  /* Features 1,2,3,8 | If command "add_feature" - creating new feature */
   else if (strcmp(argv[1], "add_feature") == 0)
   {
-    if (access(argv[2], F_OK) == 0) /** Checking for existing folders or files */
+    if (access(argv[2], F_OK) == 0) /* Checking for existing folders or files */
     {
       printf("A folder of that name already exists. Aborting.\n");
     }
 
-    else if (argc > 3 || argc < 3 || strcmp(argv[2], "") == 0) /** Checking for unallowed number of arguments */
+    else if (argc > 3 || argc < 3 || strcmp(argv[2], "") == 0) /* Checking for unallowed number of arguments */
     {
       printf("Wrong number of parameters, should be pm command arg\n");
     }
 
-    else if (strchr(argv[2], ' ') != 0) /** Checking for unallowed spaces in the 3rd argument */
+    else if (strchr(argv[2], ' ') != 0) /* Checking for unallowed spaces in the 3rd argument */
     {
       printf("Bad characters in folder name\n");
     }
@@ -1190,15 +1191,15 @@ int main(int argc, char *argv[])
       char duration[6];
 
       FILE *fp;
-      snprintf(new_branch, sizeof(new_branch), "git branch %s", argv[2]); /** Composing git command */
+      snprintf(new_branch, sizeof(new_branch), "git branch %s", argv[2]); /* Composing git command */
 
-      /** Checking for total project costs file */
+      /* Checking for total project costs file */
       if(access(".ft_parent", F_OK) == 0)
       {
-        system(new_branch); /** executing git */
-        creating_directory(argv[2]); /** Calling a function for creating a directory with folders: bin, docs, lib, src, tests */
+        system(new_branch); /* executing git */
+        creating_directory(argv[2]); /* Calling a function for creating a directory with folders: bin, docs, lib, src, tests */
 
-        /** Implementing time length counting system for the project */
+        /* Implementing time length counting system for the project */
         fp = fopen(".ft_est", "w");
 
         printf("How long will feature take to implement (in hour format e.g. \"6\"): ");
@@ -1216,42 +1217,42 @@ int main(int argc, char *argv[])
   }
 
 
-  /** Feature 4 | If command "add_tag" - adding a new tag */
+  /* Feature 4 | If command "add_tag" - adding a new tag */
   else if (strcmp(argv[1], "add_tag") == 0)
   {
-    FILE *fp = NULL; /** Establishing a pointer to the FILE structure */
+    FILE *fp = NULL; /* Establishing a pointer to the FILE structure */
 
     char content[15];
 
-    if(access(".pm_tag", F_OK) == 0) /** Checking for existing folders or files */
+    if(access(".pm_tag", F_OK) == 0) /* Checking for existing folders or files */
     {
-      fp = fopen(".pm_tag", "r"); /** Opening a file */
-      fgets(content, sizeof(content), fp); /** Storing file's contents in a variable */
+      fp = fopen(".pm_tag", "r"); /* Opening a file */
+      fgets(content, sizeof(content), fp); /* Storing file's contents in a variable */
       printf("Already a tag for this folder\n");
       printf("%s", content);
 
-      fclose(fp); /** Closing a file */
+      fclose(fp); /* Closing a file */
       fp = NULL;
     }
 
-    else if(argc > 3 || argc < 3 || strcmp(argv[2], "") == 0) /** Checking for unallowed number of arguments */
+    else if(argc > 3 || argc < 3 || strcmp(argv[2], "") == 0) /* Checking for unallowed number of arguments */
     {
       printf("Wrong number of parameters, should be pm command arg\n");
     }
 
-    else if (strchr(argv[2], ' ') != 0) /** Checking for unallowed spaces in the 3rd argument */
+    else if (strchr(argv[2], ' ') != 0) /* Checking for unallowed spaces in the 3rd argument */
     {
       printf("Bad characters in folder name\n");
     }
 
     else
     {
-      fp = fopen(".pm_tag", "w+"); /** Opening a file */
+      fp = fopen(".pm_tag", "w+"); /* Opening a file */
 
-      snprintf(content, 10, "%s\n", argv[2]); /** Constructing a string */
+      snprintf(content, 10, "%s\n", argv[2]); /* Constructing a string */
 
-      fputs(content, fp);  /** Writing to a file */
-      fclose(fp); /** Closing a file */
+      fputs(content, fp);  /* Writing to a file */
+      fclose(fp); /* Closing a file */
       fp = NULL;
       printf("Tag successfully added!\n");
     }
@@ -1259,15 +1260,15 @@ int main(int argc, char *argv[])
 
 
 
-  /** Feature 4 | If command "find_tag" - finding a tag */
+  /* Feature 4 | If command "find_tag" - finding a tag */
   else if (strcmp(argv[1], "find_tag") == 0)
   {
-    if (argc > 3 || argc < 3 || strcmp(argv[2], "") == 0) /** Checking for unallowed number of arguments */
+    if (argc > 3 || argc < 3 || strcmp(argv[2], "") == 0) /* Checking for unallowed number of arguments */
     {
       printf("Wrong number of parameters, should be pm command arg\n");
     }
 
-    else if (strchr(argv[2], ' ') != 0) /** Checking for unallowed spaces in the 3rd argument */
+    else if (strchr(argv[2], ' ') != 0) /* Checking for unallowed spaces in the 3rd argument */
     {
       printf("Bad characters in folder name\n");
     }
@@ -1280,70 +1281,70 @@ int main(int argc, char *argv[])
       int local_tag = 0;
       int found = 0;
 
-      /** Checking for existing folders or files */
+      /* Checking for existing folders or files */
       if (access(".pm_tag", F_OK) == 0)
       {
         FILE *fp;
         char tag[20];
 
-        fp = fopen(".pm_tag", "r"); /** Opening a file */
-        fseek(fp, 0, SEEK_END); /** Setting file's position to the end of the stream */
-        long int len = ftell(fp); /** Storing current file's position in stream */
+        fp = fopen(".pm_tag", "r"); /* Opening a file */
+        fseek(fp, 0, SEEK_END); /* Setting file's position to the end of the stream */
+        long int len = ftell(fp); /* Storing current file's position in stream */
 
-        /** If file's position more than 0 i.e. there is content */
+        /* If file's position more than 0 i.e. there is content */
         if(len > 0)
         {
-          rewind(fp); /** Rewinding file's position in stream */
-          fgets(tag, sizeof(tag), fp); /** storing contents in a variable */
+          rewind(fp); /* Rewinding file's position in stream */
+          fgets(tag, sizeof(tag), fp); /* storing contents in a variable */
           strtok(tag, "\n");
         }
 
-        /** If tag equals to input tag */
+        /* If tag equals to input tag */
         if (strcmp(argv[2], tag) == 0)
         {
-          local_tag++; /** marking tag's detection */
+          local_tag++; /* marking tag's detection */
           printf("%s\n", "./");
         }
-        fclose(fp); /** Closing a file */
+        fclose(fp); /* Closing a file */
       }
 
-      /** If tag was not detected i.e. less than 1 */
+      /* If tag was not detected i.e. less than 1 */
       if (local_tag < 1)
       {
-        /** iterating through the path's of directories inside current directory */
+        /* iterating through the path's of directories inside current directory */
         for (int i=0; i<list_file_type(1, result_list, 0, "."); i++)
         {
-          snprintf(path, sizeof(path), "%s/.pm_tag", result_list[i]); /** Constructing a string */
+          snprintf(path, sizeof(path), "%s/.pm_tag", result_list[i]); /* Constructing a string */
 
-          /** searching for a file */
+          /* searching for a file */
           if (access(path, F_OK) == 0)
           {
             FILE *fp;
             char tag[20];
 
-            fp = fopen(path, "r"); /** opening a file */
-            fseek(fp, 0, SEEK_END); /** Setting file's position to the end of the stream */
-            long int len = ftell(fp); /** Storing current file's position in a stream */
+            fp = fopen(path, "r"); /* opening a file */
+            fseek(fp, 0, SEEK_END); /* Setting file's position to the end of the stream */
+            long int len = ftell(fp); /* Storing current file's position in a stream */
 
-            /** If file's position more than 0 i.e. there is content */
+            /* If file's position more than 0 i.e. there is content */
             if(len > 0)
             {
-              rewind(fp); /** Rewinding file's position */
-              fgets(tag, 20, fp); /** Storing contents in a variable */
+              rewind(fp); /* Rewinding file's position */
+              fgets(tag, 20, fp); /* Storing contents in a variable */
               strtok(tag, "\n");
             }
 
-            /** If tag equals to input tag */
+            /* If tag equals to input tag */
             if (strcmp(argv[2], tag) == 0)
             {
-              found = 1; /** Marking tag's detection */
+              found = 1; /* Marking tag's detection */
               printf("%s\n", result_list[i]);
             }
-            fclose(fp); /** Closing a file */
+            fclose(fp); /* Closing a file */
           }
         }
 
-        /** if tag not found */
+        /* if tag not found */
         if (found == 0)
         {
           printf("Tag not found\n");
@@ -1352,41 +1353,41 @@ int main(int argc, char *argv[])
     }
   }
 
-  /** Feature 5 | If command "rename_directory" - renaming existing directory */
+  /* Feature 5 | If command "rename_directory" - renaming existing directory */
   else if (strcmp(argv[1], "rename_directory") == 0)
   {
-    if (argc > 4 || argc < 4 || strcmp(argv[2], "") == 0 || strcmp(argv[3], "") == 0) /** Checking for unallowed number of arguments */
+    if (argc > 4 || argc < 4 || strcmp(argv[2], "") == 0 || strcmp(argv[3], "") == 0) /* Checking for unallowed number of arguments */
     {
       printf("Wrong number of parameters, should be pm rename_directory existing_directory new_name\n");
     }
 
-    else if (strchr(argv[2], ' ') != 0 || strchr(argv[3], ' ') != 0) /** Checking for unallowed spaces in the 3rd and 4th arguments */
+    else if (strchr(argv[2], ' ') != 0 || strchr(argv[3], ' ') != 0) /* Checking for unallowed spaces in the 3rd and 4th arguments */
     {
       printf("Bad characters in folder name\n");
     }
 
-    else if (access(argv[2], F_OK) == 0) /** Checking for existing folders or files */
+    else if (access(argv[2], F_OK) == 0) /* Checking for existing folders or files */
     {
-      rename(argv[2], argv[3]); /** Renaming directory */
+      rename(argv[2], argv[3]); /* Renaming directory */
       printf("Directory successfully renamed!\n");
     }
 
-    else /** If directory not found - Poping an error message */
+    else /* If directory not found - Poping an error message */
     {
       printf("Couldn't find directory: %s\n", argv[2]);
     }
 
   }
 
-  /** Feature 6 | If command "move_by_tag" - creating new project */
+  /* Feature 6 | If command "move_by_tag" - creating new project */
   else if (strcmp(argv[1], "move_by_tag") == 0)
   {
-    if (argc > 4 || argc < 4 || strcmp(argv[2], "") == 0 || strcmp(argv[3], "") == 0) /** Checking for unallowed number of arguments */
+    if (argc > 4 || argc < 4 || strcmp(argv[2], "") == 0 || strcmp(argv[3], "") == 0) /* Checking for unallowed number of arguments */
     {
       printf("Wrong number of parameters, should be pm move_by_tag source_tag new_location_tag\n");
     }
 
-    else if (strchr(argv[2], ' ') != 0 || strchr(argv[3], ' ') != 0) /** Checking for unallowed spaces in the 3rd and 4th arguments */
+    else if (strchr(argv[2], ' ') != 0 || strchr(argv[3], ' ') != 0) /* Checking for unallowed spaces in the 3rd and 4th arguments */
     {
       printf("Bad characters in folder name\n");
     }
@@ -1401,25 +1402,25 @@ int main(int argc, char *argv[])
       int cur_dir = 0;
 
 
-      /** Checking for existing file */
+      /* Checking for existing file */
       if (access(".pm_tag", F_OK) == 0)
       {
         FILE *fp;
         char tag[20];
 
-        fp = fopen(".pm_tag", "r"); /** Opening a file */
-        fseek(fp, 0, SEEK_END); /** Setting file's position to the end of file */
-        long int len = ftell(fp); /** Storing file's position */
+        fp = fopen(".pm_tag", "r"); /* Opening a file */
+        fseek(fp, 0, SEEK_END); /* Setting file's position to the end of file */
+        long int len = ftell(fp); /* Storing file's position */
 
-        /** If file's position more than zero */
+        /* If file's position more than zero */
         if(len > 0)
         {
-          rewind(fp); /** Rewinding file's position */
-          fgets(tag, 20, fp); /** Storing file's contents */
+          rewind(fp); /* Rewinding file's position */
+          fgets(tag, 20, fp); /* Storing file's contents */
           strtok(tag, "\n");
         }
 
-        /** If tag found in third argument */
+        /* If tag found in third argument */
         if (strcmp(argv[2], tag) == 0)
         {
           cur_dir = 1;
@@ -1427,35 +1428,35 @@ int main(int argc, char *argv[])
           printf("Cannot move current directory elsewhere\n");
         }
 
-        /** If tag found in fourth argument */
+        /* If tag found in fourth argument */
         else if (strcmp(argv[3], tag) == 0)
         {
           found++;
           snprintf(arg3_tag, sizeof(arg3_tag), "./");
         }
-        fclose(fp); /** Closing file */
+        fclose(fp); /* Closing file */
       }
 
-      /** If tag was not found in current directory */
+      /* If tag was not found in current directory */
       if (cur_dir == 0)
       {
-        /** iterating through the path's of directories inside current directory */
+        /* iterating through the path's of directories inside current directory */
         for (int i=0; i<list_file_type(1, result_list, 0, "."); i++)
         {
           snprintf(path, sizeof(path), "%s/.pm_tag", result_list[i]);
 
-          /** Checking for tag's file */
+          /* Checking for tag's file */
           if (access(path, F_OK) == 0)
           {
             FILE *fp;
             char tag[20];
 
-            /** Opening and storing file's position */
+            /* Opening and storing file's position */
             fp = fopen(path, "r");
             fseek(fp, 0, SEEK_END);
             long int len = ftell(fp);
 
-            /** Checking if file has contents */
+            /* Checking if file has contents */
             if(len > 0)
             {
               rewind(fp);
@@ -1463,42 +1464,42 @@ int main(int argc, char *argv[])
               strtok(tag, "\n");
             }
 
-            /** Checking for tag in third argument */
+            /* Checking for tag in third argument */
             if (strcmp(argv[2], tag) == 0)
             {
               found += 2;
-              snprintf(arg2_tag, sizeof(arg2_tag), "%s", result_list[i]); /** Constructing a string */
+              snprintf(arg2_tag, sizeof(arg2_tag), "%s", result_list[i]); /* Constructing a string */
             }
 
-            /** Checking for tag in fourth argument */
+            /* Checking for tag in fourth argument */
             else if (strcmp(argv[3], tag) == 0)
             {
               found++;
-              snprintf(arg3_tag, sizeof(arg3_tag), "%s", result_list[i]); /** Constructing a string */
+              snprintf(arg3_tag, sizeof(arg3_tag), "%s", result_list[i]); /* Constructing a string */
             }
-            fclose(fp); /** Closing a file */
+            fclose(fp); /* Closing a file */
           }
         }
 
-        /** if 0 tags found */
+        /* if 0 tags found */
         if (found == 0)
         {
           printf("Tags not found\n");
         }
 
-        /** if only second tag found */
+        /* if only second tag found */
         if (found == 1)
         {
           printf("First tag not found\n");
         }
 
-        /** if only first tag found */
+        /* if only first tag found */
         if (found == 2)
         {
           printf("Second tag not found\n");
         }
 
-        /** if both tags found */
+        /* if both tags found */
         if (found == 3)
         {
           char *directory_str[30];
@@ -1508,17 +1509,17 @@ int main(int argc, char *argv[])
           int i = 0;
 
 
-          directory_str[i] = strtok(arg2_tag, "/"); /** dividing string by / into tokens */
+          directory_str[i] = strtok(arg2_tag, "/"); /* dividing string by / into tokens */
 
-          /** iterating through the tokens */
+          /* iterating through the tokens */
           while (directory_str[i] != NULL)
           {
             directory_str[++i] = strtok(NULL, "/");
           }
 
-          snprintf(dir_path, sizeof(dir_path), "%s/%s", arg3_tag, directory_str[i-1]); /** Constructing the string */
+          snprintf(dir_path, sizeof(dir_path), "%s/%s", arg3_tag, directory_str[i-1]); /* Constructing the string */
 
-          rename(arg2, dir_path); /** Transfering the directory */
+          rename(arg2, dir_path); /* Transfering the directory */
           printf("Directory successfully moved!\n");
         }
       }
@@ -1526,20 +1527,20 @@ int main(int argc, char *argv[])
   }
 
 
-  /** Feature 7 | If command "output_svg" - creating WBS tree diagram */
+  /* Feature 7 | If command "output_svg" - creating WBS tree diagram */
   else if (strcmp(argv[1], "output_svg") == 0)
   {
-    if (argc > 3 || argc < 3 || strcmp(argv[2], "") == 0) /** Checking for unallowed number of arguments */
+    if (argc > 3 || argc < 3 || strcmp(argv[2], "") == 0) /* Checking for unallowed number of arguments */
     {
       printf("Wrong number of parameters, should be pm command directory\n");
     }
 
-    else if (strchr(argv[2], ' ') != 0) /** Checking for unallowed spaces in the 3rd argument */
+    else if (strchr(argv[2], ' ') != 0) /* Checking for unallowed spaces in the 3rd argument */
     {
       printf("Bad characters in folder name\n");
     }
 
-    else if (access(argv[2], F_OK) == 0) /** Checking for existing file */
+    else if (access(argv[2], F_OK) == 0) /* Checking for existing file */
     {
       char directory[40];
       char result_list[100][100];
@@ -1562,42 +1563,42 @@ int main(int argc, char *argv[])
       int i = 0;
       int j = 0;
 
-      /** Installing plantuml */
+      /* Installing plantuml */
       system("sudo apt install -y graphviz default-jre; mkdir -p .opt/plantuml; cd .opt/plantuml; sudo curl -JLO http://sourceforge.net/projects/plantuml/files/plantuml.jar/download;");
 
-      FILE *fp = fopen("tree_diagram.txt", "w"); /** Creating a file */
+      FILE *fp = fopen("tree_diagram.txt", "w"); /* Creating a file */
 
-      snprintf(directory, sizeof(directory), "./%s", argv[2]); /** String construction */
+      snprintf(directory, sizeof(directory), "./%s", argv[2]); /* String construction */
 
-      int length = strlen(directory); /** Length of the string */
+      int length = strlen(directory); /* Length of the string */
 
-      /** Copying string */
+      /* Copying string */
       for(int i = 0; i < length; i++)
       {
         input[i] = directory[i];
       }
 
-      /** Copying string */
+      /* Copying string */
       memset(cut_str, '\0', sizeof(cut_str));
       strncpy(cut_str, input, length);
 
 
-      /** Iterating through the current directory's directories */
+      /* Iterating through the current directory's directories */
       for (int i=0; i<list_file_type(1, result_list, 0, "."); i++)
       {
-        snprintf(results, sizeof(results), "%s", result_list[i]); /** Constructing the path */
+        snprintf(results, sizeof(results), "%s", result_list[i]); /* Constructing the path */
 
-        /** Copying string with limited length */
+        /* Copying string with limited length */
         for(int i = 0; i < length; i++)
         {
           cut_result[i] = results[i];
         }
 
-        /** Copying string */
+        /* Copying string */
         memset(cut_trimmed_result, '\0', sizeof(cut_trimmed_result));
         strncpy(cut_trimmed_result, cut_result, length);
 
-        /** if input path contains part of input execute code */
+        /* if input path contains part of input execute code */
         if (strcmp(cut_trimmed_result, cut_str) == 0)
         {
           count = 0;
@@ -1605,13 +1606,13 @@ int main(int argc, char *argv[])
           num_of_slashes = 0;
           strcpy(variable2, "");
 
-          /** Iterating through the characters */
+          /* Iterating through the characters */
           while (results[count] != '\0')
           {
-            /** If symbol / found */
+            /* If symbol / found */
             if (results[count] == '/')
             {
-              num_of_slashes++; /** level of directory depth */
+              num_of_slashes++; /* level of directory depth */
             }
             count++;
           }
@@ -1630,22 +1631,22 @@ int main(int argc, char *argv[])
           tests = strstr(new_str, "tests");
 
 
-          /** Excluding bin, docs, lib, src and tests folders */
+          /* Excluding bin, docs, lib, src and tests folders */
           if (bin || docs || lib || src || tests)
           {
           }
           else
           {
-            token[j] = strtok(new_str, "/"); /** Dividing a string by symbol "/" into tokens */
+            token[j] = strtok(new_str, "/"); /* Dividing a string by symbol "/" into tokens */
 
-            /** Iterating through the string */
+            /* Iterating through the string */
             while (token[j] != NULL)
             {
               token[++j] = strtok(NULL, "/");
             }
-            snprintf(variable, sizeof(variable), "%s", token[j-1]); /** Constructing the string */
+            snprintf(variable, sizeof(variable), "%s", token[j-1]); /* Constructing the string */
 
-            /** Constructing number of levels in the directory */
+            /* Constructing number of levels in the directory */
             for (num = 0; num < num_of_slashes; num++)
             {
               strcat(variable2, "*");
@@ -1662,19 +1663,19 @@ int main(int argc, char *argv[])
       char end_temp[20] = "@endwbs";
       int k = 0;
 
-      /** Shifting 1 file's position */
+      /* Shifting 1 file's position */
       while (constructed_str[k] != '*')
       {
         memmove(constructed_str, constructed_str+1, strlen(constructed_str));
       }
 
-      /** Constructing a final string in plantuml format */
+      /* Constructing a final string in plantuml format */
       snprintf(mess, 500, "%s\n%s%s\n", start_temp, constructed_str, end_temp);
 
-      fputs(mess, fp); /** Writing string to file */
-      fclose(fp); /** Colsing the file */
+      fputs(mess, fp); /* Writing string to file */
+      fclose(fp); /* Colsing the file */
 
-      /** Processing txt file through plantuml */
+      /* Processing txt file through plantuml */
       system("java -jar .opt/plantuml/plantuml.jar tree_diagram.txt");
 
 
@@ -1689,14 +1690,14 @@ int main(int argc, char *argv[])
       }
     }
 
-    /** If specified directory not found */
+    /* If specified directory not found */
     else
     {
       printf("Couldn't find directory: %s\n", argv[2]);
     }
   }
 
-  /** Feature 8 | If command "total_worktime" - total estimated hours to work on a project */
+  /* Feature 8 | If command "total_worktime" - total estimated hours to work on a project */
   else if (strcmp(argv[1], "total_worktime") == 0)
   {
     if(access(".ft_parent", F_OK) == 0)
@@ -1711,33 +1712,33 @@ int main(int argc, char *argv[])
       FILE *fp;
 
 
-      /** iterating through the path's of directories inside current directory */
+      /* iterating through the path's of directories inside current directory */
       for (int i=0; i<list_file_type(1, result_list, 0, "."); i++)
       {
-        snprintf(path, sizeof(path), "%s/.ft_est", result_list[i]); /** Constructing a string */
+        snprintf(path, sizeof(path), "%s/.ft_est", result_list[i]); /* Constructing a string */
 
-        /** searching for a file */
+        /* searching for a file */
         if (access(path, F_OK) == 0)
         {
 
-          /** individual feature length in hours */
+          /* individual feature length in hours */
           fp = fopen(path, "r");
           fgets(duration, 10, fp);
           strtok(duration, "\n");
           fclose(fp);
 
-          /** Converting to type int */
+          /* Converting to type int */
           int_feature_num = atoi(duration);
           int_result += int_feature_num;
           snprintf(char_result, sizeof(char_result), "%d", int_result);
 
 
-          /** Putting found duration into the file */
+          /* Putting found duration into the file */
           fp = fopen(".ft_parent", "w");
           fputs(char_result, fp);
           fclose(fp);
 
-          /** Reading total hour number */
+          /* Reading total hour number */
           fp = fopen(".ft_parent", "r");
           fgets(contents, sizeof(contents) , fp);
           fclose(fp);
@@ -1754,20 +1755,20 @@ int main(int argc, char *argv[])
 
 
 
-  /** Feature 9 | If command "output_gantt" - creating gantt chart */
+  /* Feature 9 | If command "output_gantt" - creating gantt chart */
   else if (strcmp(argv[1], "output_gantt") == 0)
   {
-    if (argc > 3 || argc < 3 || strcmp(argv[2], "") == 0) /** Checking for unallowed number of arguments */
+    if (argc > 3 || argc < 3 || strcmp(argv[2], "") == 0) /* Checking for unallowed number of arguments */
     {
       printf("Wrong number of parameters, should be pm command directory\n");
     }
 
-    else if (strchr(argv[2], ' ') != 0) /** Checking for unallowed spaces in the 3rd argument */
+    else if (strchr(argv[2], ' ') != 0) /* Checking for unallowed spaces in the 3rd argument */
     {
       printf("Bad characters in folder name\n");
     }
 
-    else if (access(argv[2], F_OK) == 0) /** Checking for existing file */
+    else if (access(argv[2], F_OK) == 0) /* Checking for existing file */
     {
       char directory[40];
       char result_list[100][100];
@@ -1792,18 +1793,18 @@ int main(int argc, char *argv[])
       char hours[8];
       char hour_path[220];
 
-      /** Installing plantuml */
+      /* Installing plantuml */
       system("sudo apt install -y graphviz default-jre; mkdir -p .opt/plantuml; cd .opt/plantuml; sudo curl -JLO http://sourceforge.net/projects/plantuml/files/plantuml.jar/download;");
 
       FILE *fp;
-      fp = fopen("gantt_chart.txt", "w"); /** Creating a file */
+      fp = fopen("gantt_chart.txt", "w"); /* Creating a file */
       fclose(fp);
 
-      snprintf(directory, sizeof(directory), "./%s", argv[2]); /** String construction */
+      snprintf(directory, sizeof(directory), "./%s", argv[2]); /* String construction */
 
-      int length = strlen(directory); /** Length of the string */
+      int length = strlen(directory); /* Length of the string */
 
-      /** Copying string */
+      /* Copying string */
       for(int i = 0; i < length; i++)
       {
         input[i] = directory[i];
@@ -1813,12 +1814,12 @@ int main(int argc, char *argv[])
       strncpy(cut_str, input, length);
 
 
-      /** Iterating through the current directory's directories */
+      /* Iterating through the current directory's directories */
       for (int i=0; i<list_file_type(1, result_list, 0, "."); i++)
       {
-        snprintf(results, sizeof(results), "%s", result_list[i]); /** Constructing the path */
+        snprintf(results, sizeof(results), "%s", result_list[i]); /* Constructing the path */
 
-        /** Copying string with limited length */
+        /* Copying string with limited length */
         for(int i = 0; i < length; i++)
         {
           cut_result[i] = results[i];
@@ -1841,7 +1842,7 @@ int main(int argc, char *argv[])
         }
 
 
-        /** if input path contains part of input execute code */
+        /* if input path contains part of input execute code */
         if (strcmp(cut_trimmed_result, cut_str) == 0)
         {
           j = 0;
@@ -1860,20 +1861,20 @@ int main(int argc, char *argv[])
           tests = strstr(new_str, "tests");
 
 
-          /** Excluding bin, docs, lib, src and tests folders */
+          /* Excluding bin, docs, lib, src and tests folders */
           if (bin || docs || lib || src || tests)
           {
           }
           else
           {
-            token[j] = strtok(new_str, "/"); /** Dividing a string by symbol "/" into tokens */
+            token[j] = strtok(new_str, "/"); /* Dividing a string by symbol "/" into tokens */
 
-            /** Iterating through the string */
+            /* Iterating through the string */
             while (token[j] != NULL)
             {
               token[++j] = strtok(NULL, "/");
             }
-            snprintf(variable, sizeof(variable), "%s", token[j-1]); /** Constructing the string */
+            snprintf(variable, sizeof(variable), "%s", token[j-1]); /* Constructing the string */
 
 
             int k = 0;
@@ -1903,22 +1904,22 @@ int main(int argc, char *argv[])
       char start_temp[20] = "@startgantt";
       char end_temp[20] = "@endgantt";
       int k = 0;
-      /** Shifting 1 file's position */
+      /* Shifting 1 file's position */
 
       while (constructed_str[k] != '[')
       {
         memmove(constructed_str, constructed_str+1, strlen(constructed_str));
       }
 
-      /** Constructing a final string in plantuml format */
+      /* Constructing a final string in plantuml format */
       snprintf(mess, 500, "%s\n%s%s\n", start_temp, constructed_str, end_temp);
 
-      fp = fopen("gantt_chart.txt", "w"); /** Opening a file */
+      fp = fopen("gantt_chart.txt", "w"); /* Opening a file */
 
-      fputs(mess, fp); /** Writing string to file */
-      fclose(fp); /** Colsing the file */
+      fputs(mess, fp); /* Writing string to file */
+      fclose(fp); /* Colsing the file */
 
-      /** Processing txt file through plantuml */
+      /* Processing txt file through plantuml */
       system("java -jar .opt/plantuml/plantuml.jar gantt_chart.txt");
 
 
@@ -1933,7 +1934,7 @@ int main(int argc, char *argv[])
       }
     }
 
-    /** If specified directory not found */
+    /* If specified directory not found */
     else
     {
       printf("Couldn't find directory: %s\n", argv[2]);

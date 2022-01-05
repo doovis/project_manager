@@ -34,7 +34,8 @@ int main() {
 
 	while (1) {
 		client_socket = accept(server_socket, NULL, NULL);
-		send(client_socket, http_header, sizeof(http_header), 0);
+		send(client_socket, "HTTP/1.1 200 OK\r\n\n<html><body>hello</body></html>", sizeof(http_header), 0);
+		printf("%s\n", http_header);
 		close(client_socket);
 	}
 
