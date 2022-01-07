@@ -1,0 +1,100 @@
+\hypertarget{Project__v9_8c}{}\doxysection{Project\+\_\+v9.\+c File Reference}
+\label{Project__v9_8c}\index{Project\_v9.c@{Project\_v9.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$dirent.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+Include dependency graph for Project\+\_\+v9.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Project__v9_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{Project__v9_8c_a82acb32225c05e9aa4c524c40bc5852a_a82acb32225c05e9aa4c524c40bc5852a}{M\+A\+X\+\_\+\+C\+H\+AR}}~50
+\item 
+\#define \mbox{\hyperlink{Project__v9_8c_a132b0cef97c77a3203eb3e5920e9ad52_a132b0cef97c77a3203eb3e5920e9ad52}{I\+N\+P\+U\+T\+\_\+\+C\+H\+AR}}~30
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{Project__v9_8c_aa5df0d4d1d38bb2bc018e7285c8fbbee_aa5df0d4d1d38bb2bc018e7285c8fbbee}{listing\+\_\+directory}} (char $\ast$dirname)
+\item 
+void \mbox{\hyperlink{Project__v9_8c_a5162c4379da3cbedd8f5648e6d2a2049_a5162c4379da3cbedd8f5648e6d2a2049}{make\+\_\+path}} (char result\mbox{[}$\,$\mbox{]}, char path\mbox{[}$\,$\mbox{]}, char fname\mbox{[}$\,$\mbox{]})
+\item 
+int \mbox{\hyperlink{Project__v9_8c_a7e425d157a423f5785310ffb200ce645_a7e425d157a423f5785310ffb200ce645}{list\+\_\+file\+\_\+type}} (char type, char result\mbox{[}100\mbox{]}\mbox{[}100\mbox{]}, int index, char path\mbox{[}$\,$\mbox{]})
+\item 
+int \mbox{\hyperlink{Project__v9_8c_a9c7e17ebf1986e100827402740dac607_a9c7e17ebf1986e100827402740dac607}{creating\+\_\+directory}} (char $\ast$newdir)
+\item 
+int \mbox{\hyperlink{Project__v9_8c_a0ddf1224851353fc92bfbff6f499fa97_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ \mbox{\hyperlink{Project__v9_8c_afad3aafcd61297f723b84895931dd950_afad3aafcd61297f723b84895931dd950}{slash}} = \char`\"{}/\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{Project__v9_8c_a132b0cef97c77a3203eb3e5920e9ad52_a132b0cef97c77a3203eb3e5920e9ad52}\label{Project__v9_8c_a132b0cef97c77a3203eb3e5920e9ad52_a132b0cef97c77a3203eb3e5920e9ad52}} 
+\index{Project\_v9.c@{Project\_v9.c}!INPUT\_CHAR@{INPUT\_CHAR}}
+\index{INPUT\_CHAR@{INPUT\_CHAR}!Project\_v9.c@{Project\_v9.c}}
+\doxysubsubsection{\texorpdfstring{INPUT\_CHAR}{INPUT\_CHAR}}
+{\footnotesize\ttfamily \#define I\+N\+P\+U\+T\+\_\+\+C\+H\+AR~30}
+
+\mbox{\Hypertarget{Project__v9_8c_a82acb32225c05e9aa4c524c40bc5852a_a82acb32225c05e9aa4c524c40bc5852a}\label{Project__v9_8c_a82acb32225c05e9aa4c524c40bc5852a_a82acb32225c05e9aa4c524c40bc5852a}} 
+\index{Project\_v9.c@{Project\_v9.c}!MAX\_CHAR@{MAX\_CHAR}}
+\index{MAX\_CHAR@{MAX\_CHAR}!Project\_v9.c@{Project\_v9.c}}
+\doxysubsubsection{\texorpdfstring{MAX\_CHAR}{MAX\_CHAR}}
+{\footnotesize\ttfamily \#define M\+A\+X\+\_\+\+C\+H\+AR~50}
+
+Defining macros 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{Project__v9_8c_a9c7e17ebf1986e100827402740dac607_a9c7e17ebf1986e100827402740dac607}\label{Project__v9_8c_a9c7e17ebf1986e100827402740dac607_a9c7e17ebf1986e100827402740dac607}} 
+\index{Project\_v9.c@{Project\_v9.c}!creating\_directory@{creating\_directory}}
+\index{creating\_directory@{creating\_directory}!Project\_v9.c@{Project\_v9.c}}
+\doxysubsubsection{\texorpdfstring{creating\_directory()}{creating\_directory()}}
+{\footnotesize\ttfamily int creating\+\_\+directory (\begin{DoxyParamCaption}\item[{char $\ast$}]{newdir }\end{DoxyParamCaption})}
+
+Defining a function which creates a new folder structure \mbox{\Hypertarget{Project__v9_8c_a7e425d157a423f5785310ffb200ce645_a7e425d157a423f5785310ffb200ce645}\label{Project__v9_8c_a7e425d157a423f5785310ffb200ce645_a7e425d157a423f5785310ffb200ce645}} 
+\index{Project\_v9.c@{Project\_v9.c}!list\_file\_type@{list\_file\_type}}
+\index{list\_file\_type@{list\_file\_type}!Project\_v9.c@{Project\_v9.c}}
+\doxysubsubsection{\texorpdfstring{list\_file\_type()}{list\_file\_type()}}
+{\footnotesize\ttfamily int list\+\_\+file\+\_\+type (\begin{DoxyParamCaption}\item[{char}]{type,  }\item[{char}]{result\mbox{[}100\mbox{]}\mbox{[}100\mbox{]},  }\item[{int}]{index,  }\item[{char}]{path\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+Recursively iterating through files/directories function \mbox{\Hypertarget{Project__v9_8c_aa5df0d4d1d38bb2bc018e7285c8fbbee_aa5df0d4d1d38bb2bc018e7285c8fbbee}\label{Project__v9_8c_aa5df0d4d1d38bb2bc018e7285c8fbbee_aa5df0d4d1d38bb2bc018e7285c8fbbee}} 
+\index{Project\_v9.c@{Project\_v9.c}!listing\_directory@{listing\_directory}}
+\index{listing\_directory@{listing\_directory}!Project\_v9.c@{Project\_v9.c}}
+\doxysubsubsection{\texorpdfstring{listing\_directory()}{listing\_directory()}}
+{\footnotesize\ttfamily int listing\+\_\+directory (\begin{DoxyParamCaption}\item[{char $\ast$}]{dirname }\end{DoxyParamCaption})}
+
+Defining a function which takes and lists specified directory \mbox{\Hypertarget{Project__v9_8c_a0ddf1224851353fc92bfbff6f499fa97_a0ddf1224851353fc92bfbff6f499fa97}\label{Project__v9_8c_a0ddf1224851353fc92bfbff6f499fa97_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{Project\_v9.c@{Project\_v9.c}!main@{main}}
+\index{main@{main}!Project\_v9.c@{Project\_v9.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+Entering a program which has multiple interfaces. A command line interface and a Wizard interface. \mbox{\Hypertarget{Project__v9_8c_a5162c4379da3cbedd8f5648e6d2a2049_a5162c4379da3cbedd8f5648e6d2a2049}\label{Project__v9_8c_a5162c4379da3cbedd8f5648e6d2a2049_a5162c4379da3cbedd8f5648e6d2a2049}} 
+\index{Project\_v9.c@{Project\_v9.c}!make\_path@{make\_path}}
+\index{make\_path@{make\_path}!Project\_v9.c@{Project\_v9.c}}
+\doxysubsubsection{\texorpdfstring{make\_path()}{make\_path()}}
+{\footnotesize\ttfamily void make\+\_\+path (\begin{DoxyParamCaption}\item[{char}]{result\mbox{[}$\,$\mbox{]},  }\item[{char}]{path\mbox{[}$\,$\mbox{]},  }\item[{char}]{fname\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+Defining a path construction function 
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{Project__v9_8c_afad3aafcd61297f723b84895931dd950_afad3aafcd61297f723b84895931dd950}\label{Project__v9_8c_afad3aafcd61297f723b84895931dd950_afad3aafcd61297f723b84895931dd950}} 
+\index{Project\_v9.c@{Project\_v9.c}!slash@{slash}}
+\index{slash@{slash}!Project\_v9.c@{Project\_v9.c}}
+\doxysubsubsection{\texorpdfstring{slash}{slash}}
+{\footnotesize\ttfamily const char$\ast$ slash = \char`\"{}/\char`\"{}}
+

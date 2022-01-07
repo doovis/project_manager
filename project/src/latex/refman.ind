@@ -1,0 +1,44 @@
+\begin{theindex}
+
+  \item {creating\_directory}
+    \subitem {Project\_v9.c}, \hyperpage{4}
+
+  \indexspace
+
+  \item {INPUT\_CHAR}
+    \subitem {Project\_v9.c}, \hyperpage{4}
+
+  \indexspace
+
+  \item {list\_file\_type}
+    \subitem {Project\_v9.c}, \hyperpage{4}
+  \item {listing\_directory}
+    \subitem {Project\_v9.c}, \hyperpage{4}
+
+  \indexspace
+
+  \item {main}
+    \subitem {Project\_v9.c}, \hyperpage{4}
+  \item {make\_path}
+    \subitem {Project\_v9.c}, \hyperpage{5}
+  \item {MAX\_CHAR}
+    \subitem {Project\_v9.c}, \hyperpage{4}
+
+  \indexspace
+
+  \item {Project\_v9.c}, \hyperpage{3}
+    \subitem {creating\_directory}, \hyperpage{4}
+    \subitem {INPUT\_CHAR}, \hyperpage{4}
+    \subitem {list\_file\_type}, \hyperpage{4}
+    \subitem {listing\_directory}, \hyperpage{4}
+    \subitem {main}, \hyperpage{4}
+    \subitem {make\_path}, \hyperpage{5}
+    \subitem {MAX\_CHAR}, \hyperpage{4}
+    \subitem {slash}, \hyperpage{5}
+
+  \indexspace
+
+  \item {slash}
+    \subitem {Project\_v9.c}, \hyperpage{5}
+
+\end{theindex}
